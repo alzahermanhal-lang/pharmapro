@@ -142,7 +142,7 @@ tr:hover td{background:#f7faff}
 <div class="overlay" id="login"><div class="box"><h2>🔐 <span data-t="login">تسجيل الدخول</span></h2><input type="text" id="lg-user" class="login-input" placeholder="admin"><input type="password" id="lg-pass" class="login-input" placeholder="••••"><div id="lg-err" style="color:#dc2626;min-height:20px"></div><button class="btn" style="width:100%" <button class="btn" style="width:100%" onclick="doLogin()" data-t="login">دخول</button><div style="display:flex;gap:6px;justify-content:center;margin-top:10px"><button class="link-btn" onclick="setLangQuick('ar')">العربية</button><button class="link-btn" onclick="setLangQuick('en')">English</button><button class="link-btn" onclick="setLangQuick('ckb')">کوردی</button></div><p class="hint" style="margin-top:10px" data-t="login_hint"></p></div></div>
 <div id="app" style="display:none">
 <aside class="sidebar">
-<div class="sb-logo">💊 <span>Dawa</span><span class="pill">v2.0</span></div>
+<div class="sb-logo">💊 <span>Dawa</span><span class="pill">v2.3</span></div>
 <button class="tab active" id="tab-home" onclick="switchTab('home')"><span class="ic">🏠</span><span data-t="home"></span></button>
 <button class="tab" id="tab-sell" onclick="switchTab('sell')"><span class="ic">🧾</span><span data-t="sell"></span></button>
 <button class="tab" id="tab-drugs" onclick="switchTab('drugs')"><span class="ic">💊</span><span data-t="drugs"></span></button>
@@ -153,7 +153,7 @@ tr:hover td{background:#f7faff}
 <button class="tab" id="tab-ix" onclick="switchTab('ix')"><span class="ic">⚠️</span><span data-t="ix"></span></button>
 <button class="tab" id="tab-chat" onclick="switchTab('chat')"><span class="ic">🤖</span><span data-t="chat"></span></button>
 <button class="tab" id="tab-set" onclick="switchTab('set')"><span class="ic">⚙️</span><span data-t="set"></span></button>
-<div class="sb-foot">Dawa v2.0<br><span data-t="footer_sub"></span></div>
+<div class="sb-foot">Dawa v2.3<br><span data-t="footer_sub"></span></div>
 </aside>
 <div class="main">
 <header class="topbar">
@@ -242,7 +242,7 @@ const STR = {
    act_err_format:'كود غير صحيح — تحقق من نسخه كاملاً',act_err_name:'الكود لا يطابق اسم الصيدلية',act_err_exp:'انتهت صلاحية هذا الكود — تواصل للتجديد',
    act_ok:'تم التفعيل بنجاح ✓',act_status:'حالة التفعيل',act_active:'مفعّل',act_trial:'نسخة تجريبية',act_expires:'تنتهي في',act_permanent:'دائم',
    act_left:'متبقٍ',act_day:'يوم',act_deactivate:'إلغاء التفعيل',act_trial_end:'انتهت الفترة التجريبية — فعّل النظام للمتابعة',
-   act_trial_warn:'أيام متبقية في التجربة',act_contact:'للحصول على كود: تواصل مع الموزع',trial_badge:'تجريبي',dash:'لوحة التحكم',tb_sell:'بيع جديد',tb_search:'بحث دواء',tb_out:'خروج',hello:'أهلاً',hero_s1:'لوحة عمل سريعة لصيدلية',hero_s2:'— المبيعات والمخزون والأدوية والتقارير من مكان واحد',hb_sell:'فاتورة بيع جديدة',hb_drugs:'إدارة الأدوية',hb_inv:'حركة المادة',hb_rep:'التقارير',voice_title:'بيع بالصوت',voice_btn:'اضغط وتحدث — مثال: "بعت 3 علب أوجمنتين"',chat_welcome:'✋ اسألني: بديل دواء نافد؟ سعر؟ جرعة طفل بالوزن؟ دواء للحامل؟ أو أي سؤال صيدلاني — والأسئلة العامة تحتاج إنترنت',footer_sub:'نظام إدارة الصيدليات العربي',quick_lang:'اللغة',setup_title:'إنشاء حساب المدير',setup_sub:'أول تشغيل للنظام — أنشئ اسم المستخدم وكلمة السر الخاصة بك (احفظهما في مكان آمن)',su_phname:'اسم الصيدلية',su_user:'اسم المستخدم',su_pass:'كلمة السر',su_pass2:'تأكيد كلمة السر',setup_btn:'إنشاء والمتابعة ✓',su_err_user:'اسم المستخدم 3 أحرف على الأقل',su_err_pass:'كلمة السر 4 أحرف على الأقل',su_err_match:'كلمتا السر غير متطابقتين',login_hint:'ادخل بالبيانات التي أنشأتها عند التثبيت'},
+   act_trial_warn:'أيام متبقية في التجربة',act_contact:'للحصول على كود: تواصل مع الموزع',trial_badge:'تجريبي',dash:'لوحة التحكم',tb_sell:'بيع جديد',tb_search:'بحث دواء',tb_out:'خروج',hello:'أهلاً',hero_s1:'لوحة عمل سريعة لصيدلية',hero_s2:'— المبيعات والمخزون والأدوية والتقارير من مكان واحد',hb_sell:'فاتورة بيع جديدة',hb_drugs:'إدارة الأدوية',hb_inv:'حركة المادة',hb_rep:'التقارير',voice_title:'بيع بالصوت',voice_btn:'اضغط وتحدث — مثال: "بعت 3 علب أوجمنتين"',chat_welcome:'✋ اسألني: بديل دواء نافد؟ سعر؟ جرعة طفل بالوزن؟ دواء للحامل؟ أو أي سؤال صيدلاني — والأسئلة العامة تحتاج إنترنت',footer_sub:'نظام إدارة الصيدليات العربي',quick_lang:'اللغة',setup_title:'إنشاء حساب المدير',setup_sub:'أول تشغيل للنظام — أنشئ اسم المستخدم وكلمة السر الخاصة بك (احفظهما في مكان آمن)',su_phname:'اسم الصيدلية',su_user:'اسم المستخدم',su_pass:'كلمة السر',su_pass2:'تأكيد كلمة السر',setup_btn:'إنشاء والمتابعة ✓',su_err_user:'اسم المستخدم 3 أحرف على الأقل',su_err_pass:'كلمة السر 4 أحرف على الأقل',su_err_match:'كلمتا السر غير متطابقتين',login_hint:'ادخل بالبيانات التي أنشأتها عند التثبيت',trial_ok:'تم تفعيل التجربة — متبقٍ X يوم'},
  en: {app:'Arabic Pharmacy Management',home:'Home',sell:'Sell',drugs:'Drugs',inv:'Inventory',
    sup:'Suppliers',cust:'Customers',rep:'Reports',ix:'Interactions',chat:'Assistant',set:'Settings',
    sales_today:"Today's Sales",profit:'Net Profit',stock_val:'Stock Value',low:'Low Stock',
@@ -268,7 +268,7 @@ const STR = {
    act_err_format:'Invalid code — copy it exactly',act_err_name:'Code does not match pharmacy name',act_err_exp:'This code has expired — contact for renewal',
    act_ok:'Activated successfully ✓',act_status:'Activation Status',act_active:'Active',act_trial:'Trial Version',act_expires:'Expires on',act_permanent:'Permanent',
    act_left:'remaining',act_day:'days',act_deactivate:'Deactivate',act_trial_end:'Trial ended — activate to continue',
-   act_trial_warn:'Trial days left',act_contact:'To get a code: contact the distributor',trial_badge:'TRIAL',dash:'Control Panel',tb_sell:'New Sale',tb_search:'Drug Research',tb_out:'Logout',hello:'Welcome',hero_s1:'Quick panel for',hero_s2:'— sales, stock, medications & reports in one place',hb_sell:'New Sale Invoice',hb_drugs:'Manage Medications',hb_inv:'Inventory Movement',hb_rep:'Reports',voice_title:'Voice Selling',voice_btn:'Press & speak — e.g. "sold 3 boxes of Augmentin"',chat_welcome:'✋ Ask me: alternative for out-of-stock? price? child dose by weight? pregnancy-safe? or any pharmacy question — general questions need internet',footer_sub:'Arabic Pharmacy Management System',quick_lang:'Language',setup_title:'Create Admin Account',setup_sub:'First run — create your username & password (keep them safe)',su_phname:'Pharmacy Name',su_user:'Username',su_pass:'Password',su_pass2:'Confirm Password',setup_btn:'Create & Continue ✓',su_err_user:'Username: 3+ characters',su_err_pass:'Password: 4+ characters',su_err_match:'Passwords do not match',login_hint:'Login with the credentials you created at setup'},
+   act_trial_warn:'Trial days left',act_contact:'To get a code: contact the distributor',trial_badge:'TRIAL',dash:'Control Panel',tb_sell:'New Sale',tb_search:'Drug Research',tb_out:'Logout',hello:'Welcome',hero_s1:'Quick panel for',hero_s2:'— sales, stock, medications & reports in one place',hb_sell:'New Sale Invoice',hb_drugs:'Manage Medications',hb_inv:'Inventory Movement',hb_rep:'Reports',voice_title:'Voice Selling',voice_btn:'Press & speak — e.g. "sold 3 boxes of Augmentin"',chat_welcome:'✋ Ask me: alternative for out-of-stock? price? child dose by weight? pregnancy-safe? or any pharmacy question — general questions need internet',footer_sub:'Arabic Pharmacy Management System',quick_lang:'Language',setup_title:'Create Admin Account',setup_sub:'First run — create your username & password (keep them safe)',su_phname:'Pharmacy Name',su_user:'Username',su_pass:'Password',su_pass2:'Confirm Password',setup_btn:'Create & Continue ✓',su_err_user:'Username: 3+ characters',su_err_pass:'Password: 4+ characters',su_err_match:'Passwords do not match',login_hint:'Login with the credentials you created at setup',trial_ok:'Trial activated — X days left'},
  ckb: {app:'سیستەمی بەڕێوەبردنی دەرمانخانەکان',home:'ماڵەوە',sell:'فرۆشتن',drugs:'دەرمانەکان',inv:'کۆگا',
    sup:'دابینکەرەکان',cust:'کڕیارەکان',rep:'ڕاپۆرتەکان',ix:'نەگونجاوەکان',chat:'یارمەتیدەر',set:'ڕێکخستنەکان',
    sales_today:'فرۆشتی ئەمڕۆ',profit:'قازانج',stock_val:'بەهای کۆگا',low:'کۆمای کەم',
@@ -294,7 +294,7 @@ const STR = {
    act_err_format:'کۆدەکە هەڵەیە',act_err_name:'کۆدەکە لەگەڵ ناو ناگونجێت',act_err_exp:'کۆدەکە بەسەرچووە',
    act_ok:'بەسەرکەوتووانە چالاککرا ✓',act_status:'دۆخی چالاککردن',act_active:'چالاکە',act_trial:'وەشانی تاقیکردنەوە',act_expires:'بەسەردەچێت لە',act_permanent:'هەمیشەیی',
    act_left:'مابێت',act_day:'ڕۆژ',act_deactivate:'لابردنی چالاککردن',act_trial_end:'تاقیکردنەوە تەواو بوو — چالاکی بکە',
-   act_trial_warn:'ڕۆژی ماوە',act_contact:'بۆ وەرگرتنی کۆد: پەیوەندی بە فرۆشیارەوە بکە',trial_badge:'تاقیکردنەوە',dash:'کۆنترۆڵ پانێل',tb_sell:'فرۆشی نوێ',tb_search:'گەڕانی دەرمان',tb_out:'چوونەدەرەوە',hello:'بەخێربێیت',hero_s1:'تابلۆی خێرای کار بۆ دەرمانخانەی',hero_s2:'— فرۆشتن و کۆگا و دەرمان و ڕاپۆرتەکان لە شوێنێکدا',hb_sell:'پسووڵەی فرۆشی نوێ',hb_drugs:'بەڕێوەبردنی دەرمانەکان',hb_inv:'جوڵەی کۆگا',hb_rep:'ڕاپۆرتەکان',voice_title:'فرۆشتنی دەنگی',voice_btn:'دوگمەکە دابگرە و قسە بکە — بۆ نموونە: "3 عالبة فرۆشتم"',chat_welcome:'✋ لێرە بپرسە: جێگرەوەی دەرمانی نەماوە؟ نرخ؟ دۆزی منداڵ بە کێش؟ — پرسی گشتی پێویستی بە ئینتەرنێت هەیە',footer_sub:'سیستەمی بەڕێوەبردنی دەرمانخانەی عەرەبی',quick_lang:'زمان',setup_title:'دروستکردنی هەژماری بەڕێوەبەر',setup_sub:'یەکەم جار — ناو و وشەی نهێنی دروست بکە',su_phname:'ناوی دەرمانخانە',su_user:'ناوی بەکارهێنەر',su_pass:'وشەی نهێنی',su_pass2:'دووبارەکردنەوەی وشەی نهێنی',setup_btn:'دروستکردن و بەردەوامبوون ✓',su_err_user:'ناوی بەکارهێنەر: 3 پیت لە کەمتر',su_err_pass:'وشەی نهێنی: 4 پیت لە کەمتر',su_err_match:'وشەی نهێنی وەک یەک نین',login_hint:'بە زانیارییەکەت بچۆرەژوورەوە'},
+   act_trial_warn:'ڕۆژی ماوە',act_contact:'بۆ وەرگرتنی کۆد: پەیوەندی بە فرۆشیارەوە بکە',trial_badge:'تاقیکردنەوە',dash:'کۆنترۆڵ پانێل',tb_sell:'فرۆشی نوێ',tb_search:'گەڕانی دەرمان',tb_out:'چوونەدەرەوە',hello:'بەخێربێیت',hero_s1:'تابلۆی خێرای کار بۆ دەرمانخانەی',hero_s2:'— فرۆشتن و کۆگا و دەرمان و ڕاپۆرتەکان لە شوێنێکدا',hb_sell:'پسووڵەی فرۆشی نوێ',hb_drugs:'بەڕێوەبردنی دەرمانەکان',hb_inv:'جوڵەی کۆگا',hb_rep:'ڕاپۆرتەکان',voice_title:'فرۆشتنی دەنگی',voice_btn:'دوگمەکە دابگرە و قسە بکە — بۆ نموونە: "3 عالبة فرۆشتم"',chat_welcome:'✋ لێرە بپرسە: جێگرەوەی دەرمانی نەماوە؟ نرخ؟ دۆزی منداڵ بە کێش؟ — پرسی گشتی پێویستی بە ئینتەرنێت هەیە',footer_sub:'سیستەمی بەڕێوەبردنی دەرمانخانەی عەرەبی',quick_lang:'زمان',setup_title:'دروستکردنی هەژماری بەڕێوەبەر',setup_sub:'یەکەم جار — ناو و وشەی نهێنی دروست بکە',su_phname:'ناوی دەرمانخانە',su_user:'ناوی بەکارهێنەر',su_pass:'وشەی نهێنی',su_pass2:'دووبارەکردنەوەی وشەی نهێنی',setup_btn:'دروستکردن و بەردەوامبوون ✓',su_err_user:'ناوی بەکارهێنەر: 3 پیت لە کەمتر',su_err_pass:'وشەی نهێنی: 4 پیت لە کەمتر',su_err_match:'وشەی نهێنی وەک یەک نین',login_hint:'بە زانیارییەکەت بچۆرەژوورەوە',trial_ok:'تاقیکردنەوە چالاککرا — X ڕۆژ ماوە'},
 };
 const t = k => (STR[ST.lang] && STR[ST.lang][k]) || STR.ar[k] || k;
 
@@ -324,7 +324,7 @@ let ST = {
   perms:{}, currentUser:null,
   sales:[], customers:[], suppliers:[], transactions:[],
   purchaseSeq:1, saleSeq:1,
-  activated:false, act:null, firstRun:0, apiKey:'', apiUrl:'https://api.openai.com/v1', apiModel:'gpt-4o-mini',
+  activated:false, act:null, firstRun:0, trialUntil:0, apiKey:'', apiUrl:'https://api.openai.com/v1', apiModel:'gpt-4o-mini',
   customDrugs:[], stkOverride:{},
 };
 function save(){ try{ localStorage.setItem(LS_KEY, JSON.stringify(ST)); }catch(e){} }
@@ -373,7 +373,7 @@ function doSetup(){
 
 // ====== نظام التفعيل والتجربة ======
 const ACT_SECRET='PHX-9f2K$qR7mZ!2026';
-const TRIAL_DAYS=14;
+const TRIAL_DAYS=0; // 0 = قفل فوري: لا تجربة، كود التفعيل مطلوب دائماً
 function fnv1a(s){let h=0x811c9dc5;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,0x01000193)>>>0;}return h;}
 function actSign(p){var sg=fnv1a(p+'|'+ACT_SECRET).toString(36).toUpperCase();while(sg.length<7)sg='0'+sg;return sg.slice(0,7);}
 function verifyCode(code,name){
@@ -383,21 +383,28 @@ function verifyCode(code,name){
   if(actSign(payload)!==m[1].toUpperCase())return{ok:false,err:'format'};
   var parts=payload.split('|');
   if(parts[0].toUpperCase()!==name.trim().toUpperCase())return{ok:false,err:'name'};
-  var months=+parts[1]||0,ts=+parts[2]||0;
+  var months=+parts[1]||0,ts=+parts[2]||0,days=+parts[3]||0;
+  if(months===-1){
+    if(days<=0)return{ok:false,err:'format'};
+    var tu=ts+days*864e5;
+    if(Date.now()>tu)return{ok:false,err:'expired'};
+    return{ok:true,name:parts[0],trial:days,trialUntil:tu};
+  }
   var exp=months===0?0:ts+months*30*864e5;
   if(exp&&Date.now()>exp)return{ok:false,err:'expired'};
   return{ok:true,name:parts[0],months:months,exp:exp};
 }
-function isAct(){return !!(ST.activated&&ST.act&&(!ST.act.exp||Date.now()<ST.act.exp));}
+function isAct(){if(ST.activated&&ST.act&&(!ST.act.exp||Date.now()<ST.act.exp))return true;return !!(ST.trialUntil&&Date.now()<ST.trialUntil);}
 function trialInfo(){
   if(!ST.firstRun){ST.firstRun=Date.now();save();}
   var left=TRIAL_DAYS-Math.floor((Date.now()-ST.firstRun)/864e5);
   return{left:Math.max(0,left),total:TRIAL_DAYS};
 }
 function needActivation(){
-  if(isAct())return false;
-  var tr=trialInfo();
-  if(tr.left>0){showTrialBadge(tr.left);return false;}
+  if(isAct()){
+    if(ST.trialUntil&&Date.now()<ST.trialUntil){showTrialBadge(Math.ceil((ST.trialUntil-Date.now())/864e5));document.getElementById('activate').style.display='none';}
+    return false;
+  }
   showActivate();return true;
 }
 function showTrialBadge(left){
@@ -422,7 +429,15 @@ function doActivate(fromSettings){
     errEl.textContent=t(r.err==='name'?'act_err_name':r.err==='expired'?'act_err_exp':'act_err_format');
     return;
   }
-  ST.activated=true;ST.act={name:r.name,months:r.months,exp:r.exp,ts:Date.now()};
+  if(r.trial){
+    ST.trialUntil=r.trialUntil;
+    save();
+    document.getElementById('activate').style.display='none';
+    var b2=document.getElementById('trial-badge');if(b2){b2.style.display='inline-block';b2.textContent=t('trial_badge')+' — '+r.trial+' '+t('act_day');}
+    if(fromSettings){renderSettings();}else{showLogin();}
+    alert(t('trial_ok').replace('X',r.trial));return;
+  }
+  ST.activated=true;ST.act={name:r.name,months:r.months,exp:r.exp,ts:Date.now()};ST.trialUntil=0;
   if(!ST.pharmacy)ST.pharmacy={name:r.name,addr:'',phone:'',logo:''};
   save();
   document.getElementById('activate').style.display='none';
@@ -434,7 +449,7 @@ function doActivate(fromSettings){
 function deactivate(){
   if(!can('set'))return alert('✖');
   if(!confirm('إلغاء التفعيل؟ ستحتاج كوداً جديداً.'))return;
-  ST.activated=false;ST.act=null;save();
+  ST.activated=false;ST.act=null;ST.trialUntil=0;save();
   document.getElementById('app').style.display='none';
   showActivate();
 }
@@ -445,10 +460,15 @@ function renderActStatus(){
     document.getElementById('act-exp').textContent=ST.act.exp?new Date(ST.act.exp).toLocaleDateString('ar'):t('act_permanent');
     document.getElementById('act-box-set').style.display='none';
     document.getElementById('btn-deact').style.display=(curUser()&&curUser().role==='admin')?'inline-block':'none';
-  }else{
-    var tr=trialInfo();
+  }else if(ST.trialUntil&&Date.now()<ST.trialUntil){
+    var left=Math.ceil((ST.trialUntil-Date.now())/864e5);
     st.innerHTML='<span style="color:#b45309">'+t('act_trial')+'</span>';
-    document.getElementById('act-exp').textContent=tr.left>0?tr.left+' '+t('act_day')+' '+t('act_left'):t('act_trial_end');
+    document.getElementById('act-exp').textContent=left+' '+t('act_day')+' '+t('act_left');
+    document.getElementById('act-box-set').style.display='block';
+    document.getElementById('btn-deact').style.display='none';
+  }else{
+    st.innerHTML='<span style="color:#c0392b">'+t('act_trial_end')+'</span>';
+    document.getElementById('act-exp').textContent='—';
     document.getElementById('act-box-set').style.display='block';
     document.getElementById('btn-deact').style.display='none';
   }
@@ -458,8 +478,19 @@ function renderActStatus(){
 function boot(){
   var has=false;
   try{has=!!localStorage.getItem(LS_KEY);}catch(e){}
-  if(!has){ FRESH_RUN=true; showOnboarding(); }
-  else { load(); if(needActivation())return; showLogin(); }
+  if(!has){ FRESH_RUN=true; showOnboarding(); return; }
+  load();
+  // قتل بيانات الدخول الافتراضية القديمة (admin/1234) على أي جهاز
+  if(ST.users && ST.users.some(x=>x.u==='admin'&&x.p==='1234')){
+    ST.users=ST.users.filter(x=>!(x.u==='admin'&&x.p==='1234'));
+    if(!ST.users.length){
+      save(); FRESH_RUN=true;
+      document.getElementById('login').style.display='none';
+      showSetup(); return;
+    }
+    save();
+  }
+  if(needActivation())return; showLogin();
 }
 
 // ====== 5) العملات ======
