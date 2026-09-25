@@ -3,77 +3,204 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PharmaPro - نظام إدارة الصيدليات العربي</title>
+<title>Dawa - نظام إدارة الصيدليات العربي</title>
 <style>*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh}
-.overlay{position:fixed;inset:0;background:#0f172a;display:none;align-items:center;justify-content:center;z-index:200;flex-direction:column;padding:20px}
-.overlay .box{background:#1e293b;border:1px solid #334155;border-radius:18px;padding:28px;max-width:420px;width:100%;text-align:center}
-.overlay h2{color:#5eead4;margin-bottom:16px}
-.country-btn{display:block;width:100%;margin:10px 0;padding:16px;background:#0f172a;border:2px solid #334155;border-radius:12px;color:#e2e8f0;font-size:1.1rem;cursor:pointer;font-family:inherit}
-.country-btn:hover{border-color:#2dd4bf}
-.login-input{width:100%;padding:12px;border-radius:10px;border:1px solid #475569;background:#0f172a;color:#fff;margin-bottom:12px;font-family:inherit;font-size:1rem}
-.header{background:linear-gradient(135deg,#0d9488,#0369a1);padding:16px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.4);display:flex;justify-content:space-between;align-items:center;padding-right:20px}
-.header h1{font-size:1.2rem}.header span{font-size:.85rem;color:#d1f4ef}
-.tabs{display:flex;background:#1e293b;overflow-x:auto;position:sticky;top:0;z-index:10}
-.tab{flex:1;min-width:88px;padding:11px 5px;background:none;border:none;color:#94a3b8;font-size:.82rem;font-family:inherit;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap}
-.tab.active{color:#2dd4bf;border-bottom-color:#2dd4bf;font-weight:bold}
-.page{display:none;padding:16px;max-width:1100px;margin:0 auto}
-.page.active{display:block}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:16px}
-.card{background:#1e293b;border:1px solid #334155;border-radius:14px;padding:13px;text-align:center}
-.card .num{font-size:1.15rem;font-weight:bold;color:#2dd4bf}
-.card .lbl{font-size:.75rem;color:#94a3b8;margin-top:4px}
-h2{font-size:1.1rem;margin-bottom:10px;color:#5eead4}
-h3{font-size:.95rem;margin:12px 0 8px;color:#7dd3fc}
-h4{font-size:.85rem;margin:10px 0 6px;color:#a5b4fc}
-input,select,textarea{width:100%;padding:9px 11px;border-radius:9px;border:1px solid #475569;background:#0f172a;color:#e2e8f0;font-size:.9rem;font-family:inherit;margin-bottom:9px}
-input:focus,select:focus{outline:none;border-color:#2dd4bf}
-.btn{background:linear-gradient(135deg,#0d9488,#0284c7);color:#fff;border:none;padding:9px 20px;border-radius:9px;font-size:.88rem;cursor:pointer;font-family:inherit;font-weight:bold}
-.btn:hover{opacity:.88}.btn.small{padding:4px 10px;font-size:.75rem}
-table{width:100%;border-collapse:collapse;background:#1e293b;border-radius:12px;overflow:hidden;margin-bottom:11px;font-size:.83rem}
-th{background:#0f766e;color:#fff;padding:8px 6px;text-align:right}
-td{padding:8px 6px;border-top:1px solid #334155;vertical-align:top}
-.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:.73rem;font-weight:bold}
-.badge.ok{background:#065f46;color:#6ee7b7}.badge.out{background:#7f1d1d;color:#fca5a5}.badge.low{background:#78350f;color:#fcd34d}
-.alert{padding:10px 13px;border-radius:9px;margin:7px 0;font-size:.87rem;line-height:1.7}
-.alert.danger{background:#7f1d1d;color:#fecaca}.alert.warn{background:#78350f;color:#fde68a}.alert.success{background:#065f46;color:#a7f3d0}
-.muted{color:#94a3b8;font-size:.78rem}.hint{color:#94a3b8;font-size:.76rem;margin-top:5px}
-.ok-text{color:#6ee7b7}.profit{color:#6ee7b7;font-weight:bold}.debt-rem{color:#fca5a5;font-weight:bold}
+body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:#eef1f6;color:#222b3a;min-height:100vh}
+.sidebar{width:236px;position:fixed;top:0;right:0;bottom:0;background:linear-gradient(180deg,#1c2942,#141e33);color:#aeb9cc;padding:18px 12px;overflow-y:auto;z-index:60}
+.sb-logo{display:flex;align-items:center;gap:10px;padding:4px 10px 16px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:12px;font-size:1.12rem;font-weight:bold;color:#fff}
+.sb-logo .pill{font-size:.62rem;background:#2f80ed;border-radius:20px;padding:2px 9px;margin-right:auto}
+.tab{display:flex;align-items:center;gap:10px;width:100%;padding:11px 12px;margin-bottom:3px;background:none;border:none;color:#aeb9cc;font-size:.87rem;font-family:inherit;cursor:pointer;border-radius:10px;text-align:right;white-space:nowrap}
+.tab .ic{font-size:1rem;width:22px;text-align:center}
+.tab:hover{background:rgba(255,255,255,.06);color:#fff}
+.tab.active{background:linear-gradient(90deg,#2f80ed,#1d62c9);color:#fff;font-weight:bold;box-shadow:0 4px 12px rgba(47,128,237,.35)}
+.sb-foot{margin-top:18px;font-size:.68rem;color:#5f6c84;text-align:center;padding-top:12px;border-top:1px solid rgba(255,255,255,.07);line-height:1.9}
+.main{margin-right:236px;min-height:100vh;display:flex;flex-direction:column}
+.topbar{position:sticky;top:0;z-index:40;background:#ffffff;display:flex;align-items:center;gap:10px;padding:12px 20px;box-shadow:0 2px 10px rgba(20,30,60,.06)}
+.topbar h1{font-size:1.05rem;color:#1c2942;white-space:nowrap}
+.tb-sp{flex:1}
+.tbtn{border:1px solid #dde3ee;background:#f7f9fd;color:#2f80ed;padding:8px 14px;border-radius:10px;font-family:inherit;font-size:.8rem;font-weight:bold;cursor:pointer;white-space:nowrap}
+.tbtn:hover{background:#eaf2ff}
+.tbtn.solid{background:linear-gradient(135deg,#2f80ed,#1d62c9);color:#fff;border:none}
+#login-user-name{font-size:.83rem;color:#42506b;font-weight:bold;white-space:nowrap}
+.content{padding:18px 20px;max-width:1250px;width:100%;margin:0 auto}
+.hero{background:linear-gradient(120deg,#1e3a8a,#2f80ed 55%,#4aa3f0);border-radius:18px;padding:22px 24px;color:#fff;margin-bottom:16px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;box-shadow:0 8px 24px rgba(30,58,138,.22)}
+.hero h2{font-size:1.15rem;color:#fff;margin-bottom:6px}
+.hero p{font-size:.82rem;color:#d6e5ff;margin-bottom:13px}
+.hero-btns{display:flex;flex-wrap:wrap;gap:8px}
+.hbtn{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);color:#fff;padding:9px 16px;border-radius:10px;font-family:inherit;font-size:.83rem;font-weight:bold;cursor:pointer}
+.hbtn:hover{background:rgba(255,255,255,.28)}
+.hero-side{margin-right:auto}
+.live{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.15);padding:5px 13px;border-radius:20px;font-size:.72rem}
+.live .dot{width:8px;height:8px;border-radius:50%;background:#2ee66b;box-shadow:0 0 8px #2ee66b}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+.card{background:#ffffff;border:1px solid #e7ebf3;border-radius:16px;padding:14px;text-align:center;box-shadow:0 2px 8px rgba(20,30,60,.04);transition:transform .15s}
+.card:hover{transform:translateY(-2px)}
+.card .num{font-size:1.2rem;font-weight:bold;color:#1c2942}
+.card .lbl{font-size:.74rem;color:#8b94a3;margin-top:5px}
+.page{display:none}
+.page.active{display:block;animation:fade .25s}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+h2{font-size:1.05rem;margin-bottom:10px;color:#1c2942}
+h3{font-size:.92rem;margin:12px 0 8px;color:#2f80ed}
+h4{font-size:.85rem;margin:10px 0 6px;color:#6b7690}
+input,select,textarea{width:100%;padding:9px 12px;border-radius:10px;border:1px solid #dbe1ec;background:#fbfcfe;color:#222b3a;font-size:.9rem;font-family:inherit;margin-bottom:9px}
+input:focus,select:focus{outline:none;border-color:#2f80ed;box-shadow:0 0 0 3px rgba(47,128,237,.12)}
+.btn{background:linear-gradient(135deg,#2f80ed,#1d62c9);color:#fff;border:none;padding:9px 20px;border-radius:10px;font-size:.88rem;cursor:pointer;font-family:inherit;font-weight:bold}
+.btn:hover{opacity:.9}.btn.small{padding:4px 10px;font-size:.75rem}
+table{width:100%;border-collapse:collapse;background:#ffffff;border-radius:14px;overflow:hidden;margin-bottom:11px;font-size:.83rem;box-shadow:0 2px 8px rgba(20,30,60,.04)}
+th{background:#2f80ed;color:#fff;padding:9px 8px;text-align:right}
+td{padding:8px;border-top:1px solid #eef1f6;vertical-align:top}
+tr:hover td{background:#f7faff}
+.badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:.72rem;font-weight:bold}
+.badge.ok{background:#e2f6ec;color:#1e7e44}.badge.out{background:#fdeaea;color:#c0392b}.badge.low{background:#fdf3e0;color:#b9770e}
+.alert{padding:10px 13px;border-radius:10px;margin:7px 0;font-size:.87rem;line-height:1.7}
+.alert.danger{background:#fdeaea;color:#a93226}.alert.warn{background:#fdf3e0;color:#9c6500}.alert.success{background:#e2f6ec;color:#1e7e44}
+.muted{color:#8b94a3;font-size:.78rem}.hint{color:#9aa3b5;font-size:.76rem;margin-top:5px}
+.ok-text{color:#1e9e50}.profit{color:#1e9e50;font-weight:bold}.debt-rem{color:#c0392b;font-weight:bold}
 .search-row{display:flex;gap:8px;margin-bottom:10px}.search-row input{flex:1;margin-bottom:0}
-#ix-picker{max-height:220px;overflow-y:auto;background:#1e293b;border-radius:12px;padding:9px;margin-bottom:11px;border:1px solid #334155}
-.chk{display:block;padding:6px 8px;border-radius:8px;cursor:pointer;font-size:.86rem}.chk:hover{background:#253449}.chk input{margin-left:7px}
-#chat-box{background:#1e293b;border:1px solid #334155;border-radius:14px;padding:13px;height:300px;overflow-y:auto;margin-bottom:9px}
+#ix-picker{max-height:220px;overflow-y:auto;background:#fff;border-radius:12px;padding:9px;margin-bottom:11px;border:1px solid #e7ebf3}
+.chk{display:block;padding:6px 8px;border-radius:8px;cursor:pointer;font-size:.86rem}.chk:hover{background:#f2f6ff}.chk input{margin-left:7px}
+#chat-box{background:#fff;border:1px solid #e7ebf3;border-radius:14px;padding:13px;height:300px;overflow-y:auto;margin-bottom:9px}
 .msg{padding:8px 12px;border-radius:12px;margin-bottom:7px;max-width:88%;line-height:1.8;font-size:.88rem}
-.msg.user{background:#0e7490;margin-right:auto}.msg.bot{background:#334155}
+.msg.user{background:#dbeafe;color:#1e3a8a;margin-right:auto}.msg.bot{background:#f1f4fa;color:#222b3a}
 .chat-row{display:flex;gap:8px}.chat-row input{flex:1;margin-bottom:0}
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
 @media(max-width:600px){.form-grid{grid-template-columns:1fr}}
 .sell-row{display:grid;grid-template-columns:2fr 1fr auto;gap:8px;margin-bottom:8px}
-.sum-row{display:flex;justify-content:space-between;padding:6px 12px;background:#1e293b;border-radius:8px;margin-bottom:5px;font-size:.9rem}
-.sum-row.total{background:#0f766e;font-size:1rem;font-weight:bold}
-.set-sec{background:#1e293b;border:1px solid #334155;border-radius:14px;padding:16px;margin-bottom:16px}
+.sum-row{display:flex;justify-content:space-between;padding:7px 12px;background:#ffffff;border:1px solid #e7ebf3;border-radius:10px;margin-bottom:5px;font-size:.9rem}
+.sum-row.total{background:linear-gradient(135deg,#2f80ed,#1d62c9);color:#fff;font-size:1rem;font-weight:bold;border:none}
+.set-sec{background:#ffffff;border:1px solid #e7ebf3;border-radius:16px;padding:16px;margin-bottom:16px;box-shadow:0 2px 8px rgba(20,30,60,.04)}
 .set-sec h3{margin-top:0}
-.link-btn{background:none;border:1px solid #475569;color:#94a3b8;padding:6px 13px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:.8rem}
+.link-btn{background:none;border:1px solid #dbe1ec;color:#8b94a3;padding:6px 13px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:.8rem}
 #bc-video{width:100%;max-width:380px;border-radius:12px;display:none;margin:9px 0;background:#000}
-.logout{background:#7f1d1d;color:#fff;border:none;padding:6px 14px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:.8rem}
-@media print{body{background:#fff}.tabs,.header,.overlay,#chat-box,.btn{display:none!important}}.listening{background:linear-gradient(135deg,#b91c1c,#ea580c)!important;animation:vpulse 1s infinite!important}
+.logout{background:#eef1f6;color:#c0392b;border:none;padding:7px 14px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:bold;white-space:nowrap}
+.logout:hover{background:#fdeaea}
+@media print{body{background:#fff}.sidebar,.topbar,.overlay,#chat-box,.btn{display:none!important}.main{margin:0}}
+.listening{background:linear-gradient(135deg,#f39c12,#e67e22)!important;animation:vpulse 1s infinite!important}
 @keyframes vpulse{0%,100%{opacity:1}50%{opacity:.55}}
-.voice-card{background:#1e293b;border:2px solid #0d9488;border-radius:12px;padding:14px;margin:10px 0;text-align:center}
+.voice-card{background:#fff;border:2px solid #2f80ed;border-radius:14px;padding:14px;margin:10px 0;text-align:center}
+.overlay{position:fixed;inset:0;background:rgba(22,32,54,.55);display:none;align-items:center;justify-content:center;z-index:200;flex-direction:column;padding:20px}
+.overlay .box{background:#ffffff;border:1px solid #e7ebf3;border-radius:20px;padding:28px;max-width:420px;width:100%;text-align:center;box-shadow:0 20px 50px rgba(10,20,50,.25)}
+.overlay h2{color:#2f80ed;margin-bottom:16px}
+.country-btn{display:block;width:100%;margin:10px 0;padding:15px;background:#f7f9fd;border:2px solid #dbe1ec;border-radius:12px;color:#222b3a;font-size:1.05rem;cursor:pointer;font-family:inherit}
+.country-btn:hover{border-color:#2f80ed;background:#eaf2ff}
+.login-input{width:100%;padding:12px;border-radius:10px;border:1px solid #dbe1ec;background:#fbfcfe;color:#222b3a;margin-bottom:12px;font-family:inherit;font-size:1rem}
+@media(max-width:860px){
+ .sidebar{position:static;width:100%;height:auto;display:flex;flex-wrap:wrap;align-items:center;padding:10px}
+ .sb-logo{width:100%;padding-bottom:10px;margin-bottom:8px}
+ .tab{width:auto;flex:1;min-width:64px;justify-content:center;font-size:.7rem;padding:9px 4px}
+ .tab .ic{display:block;font-size:1.05rem;margin:0 auto 3px}
+ .sb-foot{display:none}
+ .main{margin-right:0}
+ .topbar{flex-wrap:wrap}
+}
+/* ===== نمط الهاتف: قائمة علوية ===== */
+.mtabs{display:none}
+@media(max-width:860px){
+ body{font-size:15px}
+ .sidebar{display:none!important}
+ .main{margin-right:0}
+ .content{padding:12px;max-width:100%}
+ .topbar{padding:10px 12px;gap:8px;height:57px;box-sizing:border-box}
+ .tbtn{display:none}
+ .topbar h1{font-size:.92rem}
+ #login-user-name{font-size:.75rem;max-width:90px;overflow:hidden;text-overflow:ellipsis}
+ #trial-badge{font-size:.62rem;padding:2px 6px}
+ .hero{padding:16px;border-radius:16px;margin-bottom:12px}
+ .hero-side{display:none}
+ .hero h2{font-size:1.05rem}
+ .hero p{font-size:.76rem;margin-bottom:10px}
+ .hero-btns{gap:6px}
+ .hbtn{padding:8px 10px;font-size:.74rem;flex:1;min-width:30%;text-align:center}
+ .cards{grid-template-columns:repeat(2,1fr);gap:8px}
+ .card{padding:11px 8px;border-radius:14px}
+ .card .num{font-size:1.05rem}
+ .card .lbl{font-size:.68rem}
+ input,select,textarea{padding:12px;font-size:.95rem;border-radius:12px}
+ .btn{padding:12px 20px;border-radius:12px;font-size:.95rem}
+ .btn.small{padding:6px 12px;font-size:.78rem}
+ h2{font-size:1rem}h3{font-size:.88rem}
+ table{font-size:.76rem;display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+ .set-sec{padding:13px;border-radius:14px}
+ .voice-card{padding:12px}
+ #chat-box{height:46vh}
+ .sell-row{grid-template-columns:1.6fr 1fr auto;gap:6px}
+ #bc-video{max-width:100%}
+ /* شريط التبويبات العلوي: لاصق تحت الهيدر، قابل للتمرير الأفقي */
+ .mtabs{display:flex;position:sticky;top:57px;z-index:70;background:#ffffff;border-bottom:1px solid #e7ebf3;box-shadow:0 2px 10px rgba(20,30,60,.05);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:0 4px}
+ .mtabs::-webkit-scrollbar{display:none}
+ .mtab{flex:0 0 auto;display:flex;align-items:center;gap:5px;background:none;border:none;border-bottom:3px solid transparent;color:#8b94a3;font-family:inherit;font-size:.74rem;font-weight:bold;cursor:pointer;padding:11px 11px 9px;white-space:nowrap}
+ .mtab .ic{font-size:1.02rem}
+ .mtab.active{color:#2f80ed;border-bottom-color:#2f80ed}
+}
 </style>
 </head>
 <body>
-<div class="overlay" id="onboard"><div class="box"><h2>💊 PharmaPro</h2><p style="color:#94a3b8;margin-bottom:14px">اختر دولة الصيدلية / Choose your country</p><div id="ob-countries"></div></div></div>
-<div class="overlay" id="login"><div class="box"><h2>🔐 <span data-t="login">تسجيل الدخول</span></h2><input type="text" id="lg-user" class="login-input" placeholder="admin"><input type="password" id="lg-pass" class="login-input" placeholder="••••"><div id="lg-err" style="color:#f87171;min-height:20px"></div><button class="btn" style="width:100%" onclick="doLogin()" data-t="login">دخول</button><p class="hint" style="margin-top:10px">admin / 1234</p></div></div>
-<div id="app" style="display:none"><div class="header"><div><h1>💊 <span data-t="app">نظام إدارة الصيدليات العربي</span></h1><span id="login-user-name"></span></div><button class="logout" onclick="doLogout()">⏻</button></div>
-<div class="tabs"><button class="tab active" id="tab-home" data-t="home" onclick="switchTab('home')"></button><button class="tab" id="tab-sell" data-t="sell" onclick="switchTab('sell')"></button><button class="tab" id="tab-drugs" data-t="drugs" onclick="switchTab('drugs')"></button><button class="tab" id="tab-inv" data-t="inv" onclick="switchTab('inv')"></button><button class="tab" id="tab-sup" data-t="sup" onclick="switchTab('sup')"></button><button class="tab" id="tab-cust" data-t="cust" onclick="switchTab('cust')"></button><button class="tab" id="tab-rep" data-t="rep" onclick="switchTab('rep')"></button><button class="tab" id="tab-ix" data-t="ix" onclick="switchTab('ix')"></button><button class="tab" id="tab-chat" data-t="chat" onclick="switchTab('chat')"></button><button class="tab" id="tab-set" data-t="set" onclick="switchTab('set')"></button></div><div class="page active" id="page-home"><div class="cards"><div class="card"><div class="num" id="st-today">-</div><div class="lbl" data-t="sales_today"></div></div><div class="card"><div class="num" id="st-profit">-</div><div class="lbl" data-t="profit"></div></div><div class="card"><div class="num" id="st-val">-</div><div class="lbl" data-t="stock_val"></div></div><div class="card"><div class="num" id="st-count">-</div><div class="lbl" data-t="drugs"></div></div><div class="card"><div class="num" id="st-low">-</div><div class="lbl" data-t="low"></div></div><div class="card"><div class="num" id="st-exp">-</div><div class="lbl" data-t="exp"></div></div><div class="card"><div class="num" id="st-oos">-</div><div class="lbl" data-t="oos"></div></div></div><h2 data-t="exp"></h2><div id="home-exp"></div><h2 data-t="low"></h2><div id="home-low"></div><h2>🛒</h2><table><tr><th></th><th data-t="drugs"></th><th data-t="qty"></th><th data-t="total"></th></tr><tbody id="home-sales"></tbody></table><h2 data-t="moves"></h2><table><tr><th></th><th></th><th data-t="drugs"></th><th data-t="qty"></th></tr><tbody id="home-moves"></tbody></table></div><div class="page" id="page-sell"><h2 data-t="sell"></h2><div class="sell-row"><select id="sell-drug"></select><input type="number" id="sell-qty" value="1" min="1"><button class="btn" onclick="addToCart(+document.getElementById('sell-drug').value,+document.getElementById('sell-qty').value)">＋</button></div><input type="text" id="bc-manual" placeholder="Barcode" onchange="onBarcode(this.value)"><button class="link-btn" onclick="startBarcode()">📷</button><video id="bc-video" playsinline muted></video><div id="bc-result"></div>
-<h3>🎙️ بيع بالصوت</h3>
-<button class="btn" id="voice-btn" style="width:100%" onclick="startVoice()">🎙️ اضغط وتحدث — مثال: "بعت 3 علب أوجمنتين"</button>
+<div class="overlay" id="onboard"><div class="box"><h2>💊 Dawa</h2><p style="color:#8a7f70;margin-bottom:14px" data-t="choose_country">اختر دولة الصيدلية / Choose your country</p><div id="ob-countries"></div></div></div>
+<div class="overlay" id="setup" style="display:none"><div class="box"><h2>🛠️ <span data-t="setup_title"></span></h2><p class="hint" style="margin-bottom:14px" data-t="setup_sub"></p><input type="text" id="su-ph" class="login-input" data-t-ph="su_phname"><input type="text" id="su-user" class="login-input" data-t-ph="su_user"><input type="password" id="su-pass" class="login-input" data-t-ph="su_pass"><input type="password" id="su-pass2" class="login-input" data-t-ph="su_pass2"><div id="su-err" style="color:#dc2626;min-height:20px;font-size:.85rem"></div><button class="btn" style="width:100%" onclick="doSetup()" data-t="setup_btn"></button></div></div>
+<div class="overlay" id="activate" style="display:none"><div class="box"><h2>🔐 <span data-t="act_title"></span></h2><p style="color:#fbbf24;font-size:.85rem;margin-bottom:10px;min-height:18px" id="act-trial-msg"></p><p class="hint" style="margin-bottom:12px"><span data-t="act_sub"></span></p><input type="text" id="ac-name" class="login-input" data-t-ph="act_name" placeholder="اسم الصيدلية"><input type="text" id="ac-code" class="login-input" data-t-ph="act_code" placeholder="PHARMA-XXXXXXX-XXXX" style="direction:ltr;text-align:left"><div id="ac-err" style="color:#dc2626;min-height:20px;font-size:.85rem"></div><button class="btn" style="width:100%" onclick="doActivate()" data-t="act_btn"></button><p class="hint" style="margin-top:10px" data-t="act_contact"></p></div></div>
+<div class="overlay" id="login"><div class="box"><h2>🔐 <span data-t="login">تسجيل الدخول</span></h2><input type="text" id="lg-user" class="login-input" placeholder="admin"><input type="password" id="lg-pass" class="login-input" placeholder="••••"><div id="lg-err" style="color:#dc2626;min-height:20px"></div><button class="btn" style="width:100%" <button class="btn" style="width:100%" onclick="doLogin()" data-t="login">دخول</button><div style="display:flex;gap:6px;justify-content:center;margin-top:10px"><button class="link-btn" onclick="setLangQuick('ar')">العربية</button><button class="link-btn" onclick="setLangQuick('en')">English</button><button class="link-btn" onclick="setLangQuick('ckb')">کوردی</button></div><p class="hint" style="margin-top:10px" data-t="login_hint"></p></div></div>
+<div id="app" style="display:none">
+<aside class="sidebar">
+<div class="sb-logo">💊 <span>Dawa</span><span class="pill">v2.0</span></div>
+<button class="tab active" id="tab-home" onclick="switchTab('home')"><span class="ic">🏠</span><span data-t="home"></span></button>
+<button class="tab" id="tab-sell" onclick="switchTab('sell')"><span class="ic">🧾</span><span data-t="sell"></span></button>
+<button class="tab" id="tab-drugs" onclick="switchTab('drugs')"><span class="ic">💊</span><span data-t="drugs"></span></button>
+<button class="tab" id="tab-inv" onclick="switchTab('inv')"><span class="ic">📦</span><span data-t="inv"></span></button>
+<button class="tab" id="tab-sup" onclick="switchTab('sup')"><span class="ic">🚚</span><span data-t="sup"></span></button>
+<button class="tab" id="tab-cust" onclick="switchTab('cust')"><span class="ic">👥</span><span data-t="cust"></span></button>
+<button class="tab" id="tab-rep" onclick="switchTab('rep')"><span class="ic">📊</span><span data-t="rep"></span></button>
+<button class="tab" id="tab-ix" onclick="switchTab('ix')"><span class="ic">⚠️</span><span data-t="ix"></span></button>
+<button class="tab" id="tab-chat" onclick="switchTab('chat')"><span class="ic">🤖</span><span data-t="chat"></span></button>
+<button class="tab" id="tab-set" onclick="switchTab('set')"><span class="ic">⚙️</span><span data-t="set"></span></button>
+<div class="sb-foot">Dawa v2.0<br><span data-t="footer_sub"></span></div>
+</aside>
+<div class="main">
+<header class="topbar">
+<h1>📋 <span data-t="dash"></span></h1>
+<div class="tb-sp"></div>
+<button class="tbtn solid" onclick="switchTab('sell')">🧾 <span data-t="tb_sell"></span></button>
+<button class="tbtn" onclick="switchTab('drugs')">🔍 <span data-t="tb_search"></span></button>
+<span id="login-user-name"></span>
+<span id="trial-badge" class="badge low" style="display:none"></span>
+<button class="logout" onclick="doLogout()">⏻ <span data-t="tb_out"></span></button>
+</header>
+<div class="content">
+<div class="page active" id="page-home">
+<div class="hero">
+<div>
+<h2>👋 <span data-t="hello"></span> <span id="hero-user"></span></h2>
+<p><span data-t="hero_s1"></span> <b id="hero-ph"></b> <span data-t="hero_s2"></span></p>
+<div class="hero-btns">
+<button class="hbtn" onclick="switchTab('sell')">🧾 <span data-t="hb_sell"></span></button>
+<button class="hbtn" onclick="switchTab('drugs')">💊 <span data-t="hb_drugs"></span></button>
+<button class="hbtn" onclick="switchTab('inv')">📦 <span data-t="hb_inv"></span></button>
+<button class="hbtn" onclick="switchTab('rep')">📊 <span data-t="hb_rep"></span></button>
+</div>
+</div>
+<div class="hero-side"><span class="live"><span class="dot"></span> LIVE</span></div>
+</div><div class="cards"><div class="card"><div class="num" id="st-today">-</div><div class="lbl" data-t="sales_today"></div></div><div class="card"><div class="num" id="st-profit">-</div><div class="lbl" data-t="profit"></div></div><div class="card"><div class="num" id="st-val">-</div><div class="lbl" data-t="stock_val"></div></div><div class="card"><div class="num" id="st-count">-</div><div class="lbl" data-t="drugs"></div></div><div class="card"><div class="num" id="st-low">-</div><div class="lbl" data-t="low"></div></div><div class="card"><div class="num" id="st-exp">-</div><div class="lbl" data-t="exp"></div></div><div class="card"><div class="num" id="st-oos">-</div><div class="lbl" data-t="oos"></div></div></div><h2 data-t="exp"></h2><div id="home-exp"></div><h2 data-t="low"></h2><div id="home-low"></div><h2>🛒</h2><table><tr><th></th><th data-t="drugs"></th><th data-t="qty"></th><th data-t="total"></th></tr><tbody id="home-sales"></tbody></table><h2 data-t="moves"></h2><table><tr><th></th><th></th><th data-t="drugs"></th><th data-t="qty"></th></tr><tbody id="home-moves"></tbody></table></div><div class="page" id="page-sell"><h2 data-t="sell"></h2><div class="sell-row"><select id="sell-drug"></select><input type="number" id="sell-qty" value="1" min="1"><button class="btn" onclick="addToCart(+document.getElementById('sell-drug').value,+document.getElementById('sell-qty').value)">＋</button></div><input type="text" id="bc-manual" placeholder="Barcode" onchange="onBarcode(this.value)"><button class="link-btn" onclick="startBarcode()">📷</button><video id="bc-video" playsinline muted></video><div id="bc-result"></div>
+<h3>🎙️ <span data-t="voice_title"></span></h3>
+<button class="btn" id="voice-btn" style="width:100%" onclick="startVoice()">🎙️ <span data-t="voice_btn"></span></button>
 <div id="voice-status"></div>
-<h3 data-t="cart"></h3><div id="cart"></div><div id="sale-summary"></div><div class="form-grid"><input type="number" id="sale-disc" placeholder="0" onchange="saleDisc=+this.value||0;calcTotals()" min="0"><select id="sale-pay" onchange="salePay=this.value"></select></div><input type="text" id="sale-customer" placeholder="العميل (اختياري)" list="cust-list-dl"><datalist id="cust-list-dl"></datalist><button class="btn" style="width:100%" onclick="checkout()" data-t="checkout"></button><div id="sell-result"></div></div><div class="page" id="page-drugs"><h2 data-t="drugs"></h2><div class="search-row"><input type="text" id="search-input" placeholder="..."><button class="btn" onclick="doSearch()" data-t="search"></button></div><div id="search-results"></div><div id="alts-box"></div><h3>➕</h3><div class="form-grid"><input type="text" id="nd-name" placeholder="Name *"><input type="text" id="nd-ing" placeholder="INN"><input type="text" id="nd-cls" placeholder="Class"><input type="text" id="nd-form" placeholder="Form"><input type="text" id="nd-dose" placeholder="Dose"><input type="number" id="nd-price" placeholder="Price"><input type="number" id="nd-cost" placeholder="Cost"><input type="number" id="nd-stock" placeholder="Qty"><input type="text" id="nd-bc" placeholder="Barcode (من علبة الدواء)"><input type="date" id="nd-expiry"></div><button class="btn" onclick="addDrug()" data-t="add"></button></div><div class="page" id="page-inv"><h2 data-t="inv"></h2><input type="text" id="inv-search" placeholder="..." onkeyup="renderInv()"><div id="inv-list"></div><h3 data-t="moves"></h3><div id="inv-moves"></div></div><div class="page" id="page-sup"><h2 data-t="sup"></h2><div class="form-grid"><input type="text" id="sup-name" placeholder="Name *"><input type="text" id="sup-phone" placeholder="Phone"><input type="text" id="sup-comp" placeholder="Company"><input type="text" id="sup-addr" placeholder="Address"></div><button class="btn" onclick="addSupplier()" data-t="add"></button><div id="sup-list" style="margin-top:14px"></div></div><div class="page" id="page-cust"><h2 data-t="cust"></h2><div class="form-grid"><input type="text" id="cust-name" placeholder="Name *"><input type="text" id="cust-phone" placeholder="Phone"></div><button class="btn" onclick="addCustomer()" data-t="add"></button><div id="cust-list" style="margin-top:14px"></div></div><div class="page" id="page-rep"><h2 data-t="rep"></h2><input type="month" id="profit-month" onchange="calcProfits()"><div class="cards"><div class="card"><div class="num" id="pf-sales">-</div><div class="lbl" data-t="total"></div></div><div class="card"><div class="num" id="pf-profit">-</div><div class="lbl" data-t="profit"></div></div><div class="card"><div class="num" id="pf-usd">-</div><div class="lbl">USD</div></div><div class="card"><div class="num" id="pf-count">-</div><div class="lbl">#</div></div></div><button class="btn" onclick="window.print()" data-t="print"></button><h3 data-t="pay"></h3><div id="pf-pay"></div><h3 data-t="date"></h3><div id="pf-days"></div><h3>💊</h3><table><tr><th data-t="drugs"></th><th data-t="qty"></th><th data-t="total"></th><th data-t="profit"></th></tr><tbody id="pf-drugs"></tbody></table></div><div class="page" id="page-ix"><h2 data-t="ix"></h2><div id="ix-picker"></div><button class="btn" onclick="runIX()" data-t="search"></button><div id="ix-results" style="margin-top:12px"></div></div><div class="page" id="page-chat"><h2 data-t="chat"></h2><div id="chat-box"><div class="msg bot">✋ اسألني: بديل دواء نافد؟ سعر؟ جرعة طفل بالوزن؟ دواء للحامل؟ أو أي سؤال صيدلاني — والأسئلة العامة تحتاج إنترنت</div></div><div class="chat-row"><input type="text" id="chat-input"><button class="btn" onclick="chatSend()" data-t="add"></button></div></div><div class="page" id="page-set"><h2 data-t="set"></h2><div class="set-sec"><h3 data-t="country"></h3><select id="set-country"></select><h3 data-t="lang"></h3><select id="set-lang"><option value="ar">العربية</option><option value="en">English</option><option value="ckb">کوردی (سۆرانی)</option></select></div><div class="set-sec"><h3 data-t="curr_set"></h3><div class="form-grid"><input type="text" id="set-base" readonly><input type="text" id="set-sec" readonly></div><label data-t="ex_rate"></label><input type="number" id="set-rate"><label><input type="checkbox" id="set-showboth" style="width:auto"> <span data-t="curr_set"></span></label></div><div class="set-sec"><h3 data-t="tax_set"></h3><label><input type="checkbox" id="set-taxon" style="width:auto"> <span data-t="tax_on"></span></label><div class="form-grid"><input type="number" id="set-taxpct" placeholder="%" min="0"><input type="text" id="set-taxname"></div></div><div class="set-sec"><h3 data-t="pay_methods"></h3><div id="pay-list"></div><div class="search-row"><input type="text" id="set-newpay" placeholder="+"><button class="btn" onclick="addPay()" data-t="add"></button></div></div><div class="set-sec"><h3 data-t="alert_set"></h3><div class="form-grid"><input type="number" id="set-alert30" value="30"><input type="number" id="set-alert60" value="60"><input type="number" id="set-alert90" value="90"></div></div><div class="set-sec"><h3 data-t="pharmacy"></h3><input type="text" id="set-phname" data-t="ph_name"><input type="text" id="set-phaddr" data-t="addr"><input type="text" id="set-phphone" data-t="phone"><input type="text" id="set-phlogo" data-t="ph_logo"><textarea id="set-invfooter" rows="2" placeholder="Footer"></textarea></div><div class="set-sec"><h3 data-t="users"></h3><div id="users-list"></div><div class="form-grid"><input type="text" id="set-newname" placeholder="Name"><input type="text" id="set-newuser" placeholder="User"><input type="password" id="set-newpass" placeholder="Pass"><select id="set-newrole"></select></div><button class="btn" onclick="addUser()" data-t="add"></button></div><div class="set-sec"><h3>API</h3><input type="password" id="set-apikey" placeholder="OpenAI Key"></div><div class="set-sec"><h3 data-t="backup"></h3><button class="btn" onclick="exportData()" data-t="export"></button> <label class="link-btn" style="display:inline-block"><span data-t="import"></span><input type="file" accept=".json" onchange="importData(event)" style="display:none"></label> <button class="link-btn" style="border-color:#b91c1c;color:#fca5a5" onclick="resetAll()" data-t="reset"></button></div><button class="btn" style="width:100%" onclick="saveSettings()" data-t="save"></button></div></div>
+<h3 data-t="cart"></h3><div id="cart"></div><div id="sale-summary"></div><div class="form-grid"><input type="number" id="sale-disc" placeholder="0" onchange="saleDisc=+this.value||0;calcTotals()" min="0"><select id="sale-pay" onchange="salePay=this.value"></select></div><input type="text" id="sale-customer" placeholder="العميل (اختياري)" list="cust-list-dl"><datalist id="cust-list-dl"></datalist><button class="btn" style="width:100%" onclick="checkout()" data-t="checkout"></button><div id="sell-result"></div></div><div class="page" id="page-drugs"><h2 data-t="drugs"></h2><div class="search-row"><input type="text" id="search-input" placeholder="..."><button class="btn" onclick="doSearch()" data-t="search"></button></div><div id="search-results"></div><div id="alts-box"></div><h3>➕</h3><div class="form-grid"><input type="text" id="nd-name" placeholder="Name *"><input type="text" id="nd-ing" placeholder="INN"><input type="text" id="nd-cls" placeholder="Class"><input type="text" id="nd-form" placeholder="Form"><input type="text" id="nd-dose" placeholder="Dose"><input type="number" id="nd-price" placeholder="Price"><input type="number" id="nd-cost" placeholder="Cost"><input type="number" id="nd-stock" placeholder="Qty"><input type="text" id="nd-bc" placeholder="Barcode (من علبة الدواء)"><input type="date" id="nd-expiry"></div><button class="btn" onclick="addDrug()" data-t="add"></button></div><div class="page" id="page-inv"><h2 data-t="inv"></h2><input type="text" id="inv-search" placeholder="..." onkeyup="renderInv()"><div id="inv-list"></div><h3 data-t="moves"></h3><div id="inv-moves"></div></div><div class="page" id="page-sup"><h2 data-t="sup"></h2><div class="form-grid"><input type="text" id="sup-name" placeholder="Name *"><input type="text" id="sup-phone" placeholder="Phone"><input type="text" id="sup-comp" placeholder="Company"><input type="text" id="sup-addr" placeholder="Address"></div><button class="btn" onclick="addSupplier()" data-t="add"></button><div id="sup-list" style="margin-top:14px"></div></div><div class="page" id="page-cust"><h2 data-t="cust"></h2><div class="form-grid"><input type="text" id="cust-name" placeholder="Name *"><input type="text" id="cust-phone" placeholder="Phone"></div><button class="btn" onclick="addCustomer()" data-t="add"></button><div id="cust-list" style="margin-top:14px"></div></div><div class="page" id="page-rep"><h2 data-t="rep"></h2><input type="month" id="profit-month" onchange="calcProfits()"><div class="cards"><div class="card"><div class="num" id="pf-sales">-</div><div class="lbl" data-t="total"></div></div><div class="card"><div class="num" id="pf-profit">-</div><div class="lbl" data-t="profit"></div></div><div class="card"><div class="num" id="pf-usd">-</div><div class="lbl">USD</div></div><div class="card"><div class="num" id="pf-count">-</div><div class="lbl">#</div></div></div><button class="btn" onclick="window.print()" data-t="print"></button><h3 data-t="pay"></h3><div id="pf-pay"></div><h3 data-t="date"></h3><div id="pf-days"></div><h3>💊</h3><table><tr><th data-t="drugs"></th><th data-t="qty"></th><th data-t="total"></th><th data-t="profit"></th></tr><tbody id="pf-drugs"></tbody></table></div><div class="page" id="page-ix"><h2 data-t="ix"></h2><div id="ix-picker"></div><button class="btn" onclick="runIX()" data-t="search"></button><div id="ix-results" style="margin-top:12px"></div></div><div class="page" id="page-chat"><h2 data-t="chat"></h2><div id="chat-box"><div class="msg bot" data-t="chat_welcome"></div></div><div class="chat-row"><input type="text" id="chat-input"><button class="btn" onclick="chatSend()" data-t="add"></button></div></div><div class="page" id="page-set"><h2 data-t="set"></h2><div class="set-sec"><h3 data-t="act_status"></h3><div class="cards" style="margin-bottom:10px"><div class="card"><div class="num" id="act-st" style="font-size:.95rem">-</div><div class="lbl" data-t="act_status"></div></div><div class="card"><div class="num" id="act-exp" style="font-size:.95rem">-</div><div class="lbl" data-t="act_expires"></div></div></div><div id="act-box-set"><input type="text" id="as-name" data-t-ph="act_name" placeholder="اسم الصيدلية"><input type="text" id="as-code" data-t-ph="act_code" placeholder="PHARMA-XXXXXXX-XXXX" style="direction:ltr;text-align:left"><div id="as-err" style="color:#f87171;min-height:18px;font-size:.83rem"></div><button class="btn" onclick="doActivate(true)" data-t="act_btn"></button></div><button class="link-btn" id="btn-deact" style="display:none;margin-top:8px;color:#f87171" onclick="deactivate()" data-t="act_deactivate"></button></div><div class="set-sec"><h3 data-t="country"></h3><select id="set-country"></select><h3 data-t="lang"></h3><select id="set-lang" onchange="langChanged(this.value)"><option value="ar">العربية</option><option value="en">English</option><option value="ckb">کوردی (سۆرانی)</option></select></div><div class="set-sec"><h3 data-t="curr_set"></h3><div class="form-grid"><input type="text" id="set-base" readonly><input type="text" id="set-sec" readonly></div><label data-t="ex_rate"></label><input type="number" id="set-rate"><label><input type="checkbox" id="set-showboth" style="width:auto"> <span data-t="curr_set"></span></label></div><div class="set-sec"><h3 data-t="tax_set"></h3><label><input type="checkbox" id="set-taxon" style="width:auto"> <span data-t="tax_on"></span></label><div class="form-grid"><input type="number" id="set-taxpct" placeholder="%" min="0"><input type="text" id="set-taxname"></div></div><div class="set-sec"><h3 data-t="pay_methods"></h3><div id="pay-list"></div><div class="search-row"><input type="text" id="set-newpay" placeholder="+"><button class="btn" onclick="addPay()" data-t="add"></button></div></div><div class="set-sec"><h3 data-t="alert_set"></h3><div class="form-grid"><input type="number" id="set-alert30" value="30"><input type="number" id="set-alert60" value="60"><input type="number" id="set-alert90" value="90"></div></div><div class="set-sec"><h3 data-t="pharmacy"></h3><input type="text" id="set-phname" data-t="ph_name"><input type="text" id="set-phaddr" data-t="addr"><input type="text" id="set-phphone" data-t="phone"><input type="text" id="set-phlogo" data-t="ph_logo"><textarea id="set-invfooter" rows="2" placeholder="Footer"></textarea></div><div class="set-sec"><h3 data-t="users"></h3><div id="users-list"></div><div class="form-grid"><input type="text" id="set-newname" placeholder="Name"><input type="text" id="set-newuser" placeholder="User"><input type="password" id="set-newpass" placeholder="Pass"><select id="set-newrole"></select></div><button class="btn" onclick="addUser()" data-t="add"></button></div><div class="set-sec"><h3>API</h3><input type="password" id="set-apikey" placeholder="OpenAI Key"></div><div class="set-sec"><h3 data-t="backup"></h3><button class="btn" onclick="exportData()" data-t="export"></button> <label class="link-btn" style="display:inline-block"><span data-t="import"></span><input type="file" accept=".json" onchange="importData(event)" style="display:none"></label> <button class="link-btn" style="border-color:#e74c3c;color:#c0392b" onclick="resetAll()" data-t="reset"></button></div><button class="btn" style="width:100%" onclick="saveSettings()" data-t="save"></button></div></div></div>
+<nav class="mtabs">
+<button class="mtab" data-tab="home" onclick="switchTab('home')"><span class="ic">🏠</span><span data-t="home"></span></button>
+<button class="mtab" data-tab="sell" onclick="switchTab('sell')"><span class="ic">🧾</span><span data-t="sell"></span></button>
+<button class="mtab" data-tab="drugs" onclick="switchTab('drugs')"><span class="ic">💊</span><span data-t="drugs"></span></button>
+<button class="mtab" data-tab="inv" onclick="switchTab('inv')"><span class="ic">📦</span><span data-t="inv"></span></button>
+<button class="mtab" data-tab="sup" onclick="switchTab('sup')"><span class="ic">🚚</span><span data-t="sup"></span></button>
+<button class="mtab" data-tab="cust" onclick="switchTab('cust')"><span class="ic">👥</span><span data-t="cust"></span></button>
+<button class="mtab" data-tab="rep" onclick="switchTab('rep')"><span class="ic">📊</span><span data-t="rep"></span></button>
+<button class="mtab" data-tab="ix" onclick="switchTab('ix')"><span class="ic">⚠️</span><span data-t="ix"></span></button>
+<button class="mtab" data-tab="chat" onclick="switchTab('chat')"><span class="ic">🤖</span><span data-t="chat"></span></button>
+<button class="mtab" data-tab="set" onclick="switchTab('set')"><span class="ic">⚙️</span><span data-t="set"></span></button>
+</nav>
+</div>
 <script>
 
 // ============================================================
-// PharmaPro - نظام إدارة الصيدليات العربي (Multi-Country)
+// Dawa - نظام إدارة الصيدليات العربي (Multi-Country)
 // البنية الداخلية: Config-driven, i18n-ready, RBAC, Batches/FEFO
 // ============================================================
 
@@ -98,7 +225,7 @@ const STR = {
    search:'بحث...',add:'إضافة',save:'حفظ',del:'حذف',print:'طباعة',close:'إغلاق',
    expired:'منتهي الصلاحية',d30:'ينتهي خلال 30 يوم',d60:'ينتهي خلال 60 يوم',d90:'ينتهي خلاد 90 يوم',
    welcome:'أهلاً',login:'تسجيل الدخول',user:'المستخدم',pass:'كلمة المرور',
-   welcome_title:'أهلاً بك في PharmaPro',choose_country:'اختر دولة الصيدلية',
+   welcome_title:'أهلاً بك في Dawa',choose_country:'اختر دولة الصيدلية',
    batch:'تشغيلة',expiry:'تاريخ الانتهاء',mfg:'تاريخ الإنتاج',supplier:'المورد',loc:'موقع التخزين',
    min_stock:'الحد الأدنى',moves:'حركات المخزون',in:'إدخال',out:'إخراج',sale:'بيع',ret_s:'مرتجع مبيعات',
    ret_p:'مرتجع مشتريات',adj:'تعديل',count:'جرد',before:'قبل',after:'بعد',reason:'السبب',
@@ -110,7 +237,12 @@ const STR = {
    pay_methods:'طرق الدفع',alert_set:'إعدادات التنبيهات',curr_set:'العملات',base_curr:'العملة الأساسية',
    sec_curr:'العملة الثانوية',ex_rate:'سعر الصرف',lang:'اللغة',country:'الدولة',users:'المستخدمون والصلاحيات',
    active:'مفعل',inactive:'غير مفعل',invoice:'فاتورة',invoice_no:'رقم الفاتورة',date:'التاريخ',time:'الوقت',emp:'الموظف',
-   backup:'نسخ احتياطي',export:'تصدير',import:'استيراد',reset:'إعادة ضبط كاملة',gen:'توليد',phone:'الهاتف',addr:'العنوان',company:'الشركة'},
+   backup:'نسخ احتياطي',export:'تصدير',import:'استيراد',reset:'إعادة ضبط كاملة',gen:'توليد',phone:'الهاتف',addr:'العنوان',company:'الشركة',
+   act_title:'تفعيل النظام',act_sub:'أدخل اسم الصيدلية وكود التفعيل المُرسل إليك',act_name:'اسم الصيدلية',act_code:'كود التفعيل',act_btn:'تفعيل ✓',
+   act_err_format:'كود غير صحيح — تحقق من نسخه كاملاً',act_err_name:'الكود لا يطابق اسم الصيدلية',act_err_exp:'انتهت صلاحية هذا الكود — تواصل للتجديد',
+   act_ok:'تم التفعيل بنجاح ✓',act_status:'حالة التفعيل',act_active:'مفعّل',act_trial:'نسخة تجريبية',act_expires:'تنتهي في',act_permanent:'دائم',
+   act_left:'متبقٍ',act_day:'يوم',act_deactivate:'إلغاء التفعيل',act_trial_end:'انتهت الفترة التجريبية — فعّل النظام للمتابعة',
+   act_trial_warn:'أيام متبقية في التجربة',act_contact:'للحصول على كود: تواصل مع الموزع',trial_badge:'تجريبي',dash:'لوحة التحكم',tb_sell:'بيع جديد',tb_search:'بحث دواء',tb_out:'خروج',hello:'أهلاً',hero_s1:'لوحة عمل سريعة لصيدلية',hero_s2:'— المبيعات والمخزون والأدوية والتقارير من مكان واحد',hb_sell:'فاتورة بيع جديدة',hb_drugs:'إدارة الأدوية',hb_inv:'حركة المادة',hb_rep:'التقارير',voice_title:'بيع بالصوت',voice_btn:'اضغط وتحدث — مثال: "بعت 3 علب أوجمنتين"',chat_welcome:'✋ اسألني: بديل دواء نافد؟ سعر؟ جرعة طفل بالوزن؟ دواء للحامل؟ أو أي سؤال صيدلاني — والأسئلة العامة تحتاج إنترنت',footer_sub:'نظام إدارة الصيدليات العربي',quick_lang:'اللغة',setup_title:'إنشاء حساب المدير',setup_sub:'أول تشغيل للنظام — أنشئ اسم المستخدم وكلمة السر الخاصة بك (احفظهما في مكان آمن)',su_phname:'اسم الصيدلية',su_user:'اسم المستخدم',su_pass:'كلمة السر',su_pass2:'تأكيد كلمة السر',setup_btn:'إنشاء والمتابعة ✓',su_err_user:'اسم المستخدم 3 أحرف على الأقل',su_err_pass:'كلمة السر 4 أحرف على الأقل',su_err_match:'كلمتا السر غير متطابقتين',login_hint:'ادخل بالبيانات التي أنشأتها عند التثبيت'},
  en: {app:'Arabic Pharmacy Management',home:'Home',sell:'Sell',drugs:'Drugs',inv:'Inventory',
    sup:'Suppliers',cust:'Customers',rep:'Reports',ix:'Interactions',chat:'Assistant',set:'Settings',
    sales_today:"Today's Sales",profit:'Net Profit',stock_val:'Stock Value',low:'Low Stock',
@@ -119,7 +251,7 @@ const STR = {
    search:'Search...',add:'Add',save:'Save',del:'Delete',print:'Print',close:'Close',
    expired:'Expired',d30:'Expires in 30 days',d60:'Expires in 60 days',d90:'Expires in 90 days',
    welcome:'Welcome',login:'Login',user:'Username',pass:'Password',
-   welcome_title:'Welcome to PharmaPro',choose_country:'Choose pharmacy country',
+   welcome_title:'Welcome to Dawa',choose_country:'Choose pharmacy country',
    batch:'Batch',expiry:'Expiry Date',mfg:'MFG Date',supplier:'Supplier',loc:'Storage Location',
    min_stock:'Min Stock',moves:'Stock Movements',in:'Stock In',out:'Stock Out',sale:'Sale',ret_s:'Sales Return',
    ret_p:'Purchase Return',adj:'Adjustment',count:'Count',before:'Before',after:'After',reason:'Reason',
@@ -131,7 +263,12 @@ const STR = {
    pay_methods:'Payment Methods',alert_set:'Alert Settings',curr_set:'Currencies',base_curr:'Base Currency',
    sec_curr:'Secondary Currency',ex_rate:'Exchange Rate',lang:'Language',country:'Country',users:'Users & Permissions',
    active:'Active',inactive:'Inactive',invoice:'Invoice',invoice_no:'Invoice #',date:'Date',time:'Time',emp:'Employee',
-   backup:'Backup',export:'Export',import:'Import',reset:'Full Reset',gen:'Generate',phone:'Phone',addr:'Address',company:'Company'},
+   backup:'Backup',export:'Export',import:'Import',reset:'Full Reset',gen:'Generate',phone:'Phone',addr:'Address',company:'Company',
+   act_title:'Activate System',act_sub:'Enter pharmacy name and the activation code sent to you',act_name:'Pharmacy Name',act_code:'Activation Code',act_btn:'Activate ✓',
+   act_err_format:'Invalid code — copy it exactly',act_err_name:'Code does not match pharmacy name',act_err_exp:'This code has expired — contact for renewal',
+   act_ok:'Activated successfully ✓',act_status:'Activation Status',act_active:'Active',act_trial:'Trial Version',act_expires:'Expires on',act_permanent:'Permanent',
+   act_left:'remaining',act_day:'days',act_deactivate:'Deactivate',act_trial_end:'Trial ended — activate to continue',
+   act_trial_warn:'Trial days left',act_contact:'To get a code: contact the distributor',trial_badge:'TRIAL',dash:'Control Panel',tb_sell:'New Sale',tb_search:'Drug Research',tb_out:'Logout',hello:'Welcome',hero_s1:'Quick panel for',hero_s2:'— sales, stock, medications & reports in one place',hb_sell:'New Sale Invoice',hb_drugs:'Manage Medications',hb_inv:'Inventory Movement',hb_rep:'Reports',voice_title:'Voice Selling',voice_btn:'Press & speak — e.g. "sold 3 boxes of Augmentin"',chat_welcome:'✋ Ask me: alternative for out-of-stock? price? child dose by weight? pregnancy-safe? or any pharmacy question — general questions need internet',footer_sub:'Arabic Pharmacy Management System',quick_lang:'Language',setup_title:'Create Admin Account',setup_sub:'First run — create your username & password (keep them safe)',su_phname:'Pharmacy Name',su_user:'Username',su_pass:'Password',su_pass2:'Confirm Password',setup_btn:'Create & Continue ✓',su_err_user:'Username: 3+ characters',su_err_pass:'Password: 4+ characters',su_err_match:'Passwords do not match',login_hint:'Login with the credentials you created at setup'},
  ckb: {app:'سیستەمی بەڕێوەبردنی دەرمانخانەکان',home:'ماڵەوە',sell:'فرۆشتن',drugs:'دەرمانەکان',inv:'کۆگا',
    sup:'دابینکەرەکان',cust:'کڕیارەکان',rep:'ڕاپۆرتەکان',ix:'نەگونجاوەکان',chat:'یارمەتیدەر',set:'ڕێکخستنەکان',
    sales_today:'فرۆشتی ئەمڕۆ',profit:'قازانج',stock_val:'بەهای کۆگا',low:'کۆمای کەم',
@@ -140,7 +277,7 @@ const STR = {
    search:'گەڕان...',add:'زیادکردن',save:'پاشەکەوت',del:'سڕینەوە',print:'چاپکردن',close:'داخستن',
    expired:'بەسەرچووە',d30:'لە 30 ڕۆژدا بەسەر دەچێت',d60:'لە 60 ڕۆژدا بەسەر دەچێت',d90:'لە 90 ڕۆژدا بەسەر دەچێت',
    welcome:'بەخێربێیت',login:'چوونەژوورەوە',user:'بەکارهێنەر',pass:'وشەی نهێنی',
-   welcome_title:'بەخێربێیت بۆ PharmaPro',choose_country:'وڵاتی دەرمانخانەکە هەڵبژێرە',
+   welcome_title:'بەخێربێیت بۆ Dawa',choose_country:'وڵاتی دەرمانخانەکە هەڵبژێرە',
    batch:'بەتچ',expiry:'بەرواری بەسەرچوون',mfg:'بەرواری بەرهەمهێنان',supplier:'دابینکەر',loc:'شوێنی هەڵگرتن',
    min_stock:'کەمترین بڕ',moves:'جوڵەکانی کۆگا',in:'هێنان',out:'هەناردە',sale:'فرۆشتن',ret_s:'گەڕانەوەی فرۆشتن',
    ret_p:'گەڕانەوەی کڕین',adj:'ڕێکخستن',count:'ژمێردن',before:'پێش',after:'پاش',reason:'هۆکار',
@@ -152,7 +289,12 @@ const STR = {
    pay_methods:'شێوازەکانی پارەدان',alert_set:'ڕێکخستنی ئاگەدارییەکان',curr_set:'دراوەکان',base_curr:'دراوی سەرەکی',
    sec_curr:'دراوی لاوەکی',ex_rate:'نرخی ئاڵوگۆڕ',lang:'زمان',country:'وڵات',users:'بەکارهێنەران و دەسەڵاتەکان',
    active:'چالاک',inactive:'ناچالاک',invoice:'وەسڵ',invoice_no:'ژمارەی وەسڵ',date:'بەروار',time:'کات',emp:'فەرمانبەر',
-   backup:'باکئەپ',export:'هەناردە',import:'هاوردە',reset:'ڕیسێتی تەواو',gen:'دروستکردن',phone:'تەلەفۆن',addr:'ناونیشان',company:'کۆمپانیا'},
+   backup:'باکئەپ',export:'هەناردە',import:'هاوردە',reset:'ڕیسێتی تەواو',gen:'دروستکردن',phone:'تەلەفۆن',addr:'ناونیشان',company:'کۆمپانیا',
+   act_title:'چالاککردنی سیستم',act_sub:'ناوی دەرمانخانە و کۆدی چالاککردن داخل بکە',act_name:'ناوی دەرمانخانە',act_code:'کۆدی چالاککردن',act_btn:'چالاککردن ✓',
+   act_err_format:'کۆدەکە هەڵەیە',act_err_name:'کۆدەکە لەگەڵ ناو ناگونجێت',act_err_exp:'کۆدەکە بەسەرچووە',
+   act_ok:'بەسەرکەوتووانە چالاککرا ✓',act_status:'دۆخی چالاککردن',act_active:'چالاکە',act_trial:'وەشانی تاقیکردنەوە',act_expires:'بەسەردەچێت لە',act_permanent:'هەمیشەیی',
+   act_left:'مابێت',act_day:'ڕۆژ',act_deactivate:'لابردنی چالاککردن',act_trial_end:'تاقیکردنەوە تەواو بوو — چالاکی بکە',
+   act_trial_warn:'ڕۆژی ماوە',act_contact:'بۆ وەرگرتنی کۆد: پەیوەندی بە فرۆشیارەوە بکە',trial_badge:'تاقیکردنەوە',dash:'کۆنترۆڵ پانێل',tb_sell:'فرۆشی نوێ',tb_search:'گەڕانی دەرمان',tb_out:'چوونەدەرەوە',hello:'بەخێربێیت',hero_s1:'تابلۆی خێرای کار بۆ دەرمانخانەی',hero_s2:'— فرۆشتن و کۆگا و دەرمان و ڕاپۆرتەکان لە شوێنێکدا',hb_sell:'پسووڵەی فرۆشی نوێ',hb_drugs:'بەڕێوەبردنی دەرمانەکان',hb_inv:'جوڵەی کۆگا',hb_rep:'ڕاپۆرتەکان',voice_title:'فرۆشتنی دەنگی',voice_btn:'دوگمەکە دابگرە و قسە بکە — بۆ نموونە: "3 عالبة فرۆشتم"',chat_welcome:'✋ لێرە بپرسە: جێگرەوەی دەرمانی نەماوە؟ نرخ؟ دۆزی منداڵ بە کێش؟ — پرسی گشتی پێویستی بە ئینتەرنێت هەیە',footer_sub:'سیستەمی بەڕێوەبردنی دەرمانخانەی عەرەبی',quick_lang:'زمان',setup_title:'دروستکردنی هەژماری بەڕێوەبەر',setup_sub:'یەکەم جار — ناو و وشەی نهێنی دروست بکە',su_phname:'ناوی دەرمانخانە',su_user:'ناوی بەکارهێنەر',su_pass:'وشەی نهێنی',su_pass2:'دووبارەکردنەوەی وشەی نهێنی',setup_btn:'دروستکردن و بەردەوامبوون ✓',su_err_user:'ناوی بەکارهێنەر: 3 پیت لە کەمتر',su_err_pass:'وشەی نهێنی: 4 پیت لە کەمتر',su_err_match:'وشەی نهێنی وەک یەک نین',login_hint:'بە زانیارییەکەت بچۆرەژوورەوە'},
 };
 const t = k => (STR[ST.lang] && STR[ST.lang][k]) || STR.ar[k] || k;
 
@@ -182,7 +324,7 @@ let ST = {
   perms:{}, currentUser:null,
   sales:[], customers:[], suppliers:[], transactions:[],
   purchaseSeq:1, saleSeq:1,
-  activated:false, apiKey:'', apiUrl:'https://api.openai.com/v1', apiModel:'gpt-4o-mini',
+  activated:false, act:null, firstRun:0, apiKey:'', apiUrl:'https://api.openai.com/v1', apiModel:'gpt-4o-mini',
   customDrugs:[], stkOverride:{},
 };
 function save(){ try{ localStorage.setItem(LS_KEY, JSON.stringify(ST)); }catch(e){} }
@@ -198,11 +340,126 @@ function applyCountry(code){
   ST.baseCurr=c.currency; ST.secCurr=c.curr2; ST.rate=c.rate;
   if(!ST.payMethods.length||!ST.payMethods._custom) ST.payMethods=c.payments.map(p=>({...p}));
 }
+
+
+function langChanged(v){ST.lang=v;save();applyLabels();renderHome();var a=document.querySelector('.tab.active');if(a){var n=a.id.replace('tab-','');if(window.renderTab)renderTab(n);}renderSettings();}
+function setLangQuick(v){ST.lang=v;save();applyLabels();}
+
+
+// ====== إعداد أول تشغيل ======
+var FRESH_RUN=false;
+function showSetup(){
+  document.getElementById('onboard').style.display='none';
+  document.getElementById('setup').style.display='flex';
+  applyLabels();
+}
+function doSetup(){
+  var ph=document.getElementById('su-ph').value.trim();
+  var u=document.getElementById('su-user').value.trim();
+  var p=document.getElementById('su-pass').value;
+  var p2=document.getElementById('su-pass2').value;
+  var err=document.getElementById('su-err');
+  if(u.length<3){err.textContent=t('su_err_user');return;}
+  if(p.length<4){err.textContent=t('su_err_pass');return;}
+  if(p!==p2){err.textContent=t('su_err_match');return;}
+  ST.pharmacy={name:ph||u,addr:'',phone:'',logo:''};
+  ST.users=[{id:1,u:u,p:p,name:u,role:'admin'}];
+  save();
+  document.getElementById('setup').style.display='none';
+  if(needActivation())return;
+  showLogin();
+}
+// ====== نهاية إعداد أول تشغيل ======
+
+// ====== نظام التفعيل والتجربة ======
+const ACT_SECRET='PHX-9f2K$qR7mZ!2026';
+const TRIAL_DAYS=14;
+function fnv1a(s){let h=0x811c9dc5;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,0x01000193)>>>0;}return h;}
+function actSign(p){var sg=fnv1a(p+'|'+ACT_SECRET).toString(36).toUpperCase();while(sg.length<7)sg='0'+sg;return sg.slice(0,7);}
+function verifyCode(code,name){
+  var m=(code||'').trim().match(/^PHARMA-([0-9A-Za-z]{7})-([A-Za-z0-9+/]+)$/);
+  if(!m)return{ok:false,err:'format'};
+  var payload;try{payload=decodeURIComponent(escape(atob(m[2])));}catch(e){return{ok:false,err:'format'};}
+  if(actSign(payload)!==m[1].toUpperCase())return{ok:false,err:'format'};
+  var parts=payload.split('|');
+  if(parts[0].toUpperCase()!==name.trim().toUpperCase())return{ok:false,err:'name'};
+  var months=+parts[1]||0,ts=+parts[2]||0;
+  var exp=months===0?0:ts+months*30*864e5;
+  if(exp&&Date.now()>exp)return{ok:false,err:'expired'};
+  return{ok:true,name:parts[0],months:months,exp:exp};
+}
+function isAct(){return !!(ST.activated&&ST.act&&(!ST.act.exp||Date.now()<ST.act.exp));}
+function trialInfo(){
+  if(!ST.firstRun){ST.firstRun=Date.now();save();}
+  var left=TRIAL_DAYS-Math.floor((Date.now()-ST.firstRun)/864e5);
+  return{left:Math.max(0,left),total:TRIAL_DAYS};
+}
+function needActivation(){
+  if(isAct())return false;
+  var tr=trialInfo();
+  if(tr.left>0){showTrialBadge(tr.left);return false;}
+  showActivate();return true;
+}
+function showTrialBadge(left){
+  var b=document.getElementById('trial-badge');
+  if(b){b.style.display='inline-block';b.textContent=t('trial_badge')+' — '+left+' '+t('act_day');}
+}
+function showActivate(){
+  document.getElementById('login').style.display='none';
+  var ov=document.getElementById('activate');ov.style.display='flex';
+  var tr=trialInfo();
+  document.getElementById('act-trial-msg').textContent=tr.left>0?'':t('act_trial_end');
+  if(ST.pharmacy&&ST.pharmacy.name)document.getElementById('ac-name').value=ST.pharmacy.name;
+  applyLabels();
+}
+function doActivate(fromSettings){
+  var nameEl=document.getElementById(fromSettings?'as-name':'ac-name');
+  var codeEl=document.getElementById(fromSettings?'as-code':'ac-code');
+  var errEl=document.getElementById(fromSettings?'as-err':'ac-err');
+  var name=nameEl.value.trim(),code=codeEl.value.trim();
+  var r=verifyCode(code,name);
+  if(!r.ok){
+    errEl.textContent=t(r.err==='name'?'act_err_name':r.err==='expired'?'act_err_exp':'act_err_format');
+    return;
+  }
+  ST.activated=true;ST.act={name:r.name,months:r.months,exp:r.exp,ts:Date.now()};
+  if(!ST.pharmacy)ST.pharmacy={name:r.name,addr:'',phone:'',logo:''};
+  save();
+  document.getElementById('activate').style.display='none';
+  var b=document.getElementById('trial-badge');if(b)b.style.display='none';
+  if(fromSettings){renderSettings();}
+  else{showLogin();}
+  alert(t('act_ok'));
+}
+function deactivate(){
+  if(!can('set'))return alert('✖');
+  if(!confirm('إلغاء التفعيل؟ ستحتاج كوداً جديداً.'))return;
+  ST.activated=false;ST.act=null;save();
+  document.getElementById('app').style.display='none';
+  showActivate();
+}
+function renderActStatus(){
+  var st=document.getElementById('act-st');if(!st)return;
+  if(isAct()){
+    st.innerHTML='<span class="ok-text">✓ '+t('act_active')+'</span>';
+    document.getElementById('act-exp').textContent=ST.act.exp?new Date(ST.act.exp).toLocaleDateString('ar'):t('act_permanent');
+    document.getElementById('act-box-set').style.display='none';
+    document.getElementById('btn-deact').style.display=(curUser()&&curUser().role==='admin')?'inline-block':'none';
+  }else{
+    var tr=trialInfo();
+    st.innerHTML='<span style="color:#b45309">'+t('act_trial')+'</span>';
+    document.getElementById('act-exp').textContent=tr.left>0?tr.left+' '+t('act_day')+' '+t('act_left'):t('act_trial_end');
+    document.getElementById('act-box-set').style.display='block';
+    document.getElementById('btn-deact').style.display='none';
+  }
+}
+// ====== نهاية نظام التفعيل ======
+
 function boot(){
-  if(!localStorage.getItem(LS_KEY)){
-    // أول تشغيل → شاشة اختيار الدولة
-    showOnboarding();
-  } else { load(); showLogin(); }
+  var has=false;
+  try{has=!!localStorage.getItem(LS_KEY);}catch(e){}
+  if(!has){ FRESH_RUN=true; showOnboarding(); }
+  else { load(); if(needActivation())return; showLogin(); }
 }
 
 // ====== 5) العملات ======
@@ -262,7 +519,7 @@ function renderCart(){
   let sub=0;
   box.innerHTML='<table><tr><th>'+t('drugs')+'</th><th>'+t('qty')+'</th><th>'+t('price')+'</th><th>'+t('total')+'</th><th></th></tr>'+
     cart.map((c,i)=>{const d=PRODUCTS.find(x=>x.id===c.id);const line=d.p*c.qty;sub+=line;
-      return '<tr><td>'+esc(d.n)+'</td><td><input type="number" value="'+c.qty+'" min="1" style="width:56px" onchange="cart['+i+'].qty=+this.value;renderCart()"></td><td>'+fmt(d.p)+'</td><td>'+fmt(line)+'</td><td><button class="btn small" style="background:#7f1d1d" onclick="cart.splice('+i+',1);renderCart()">×</button></td></tr>';}).join('')+'</table>';
+      return '<tr><td>'+esc(d.n)+'</td><td><input type="number" value="'+c.qty+'" min="1" style="width:56px" onchange="cart['+i+'].qty=+this.value;renderCart()"></td><td>'+fmt(d.p)+'</td><td>'+fmt(line)+'</td><td><button class="btn small" style="background:#c05555" onclick="cart.splice('+i+',1);renderCart()">×</button></td></tr>';}).join('')+'</table>';
   tot.textContent=fmt(sub); calcTotals();
 }
 function calcTotals(){
@@ -335,7 +592,7 @@ function addSupplier(){
 function paySupplier(id){
   const amt=+prompt(t('payments')+':','');if(!amt)return;
   const s=ST.suppliers.find(x=>x.id===id);s.balance-=amt;
-  ST.transactions.push({id:Date.now(),ts:nowStr(),user:curUser()?.name||'-',type:'sup_pay',pname:s.name,qty:0,amount:amt,reason:''});
+  ST.transactions.push({id:Date.now(),ts:nowStr(),user:(curUser()||{}).name||'-',type:'sup_pay',pname:s.name,qty:0,amount:amt,reason:''});
   save();renderSuppliers();
 }
 function renderSuppliers(){
@@ -487,7 +744,7 @@ function checkIX(ids){const drugs=ids.map(id=>PRODUCTS.find(x=>x.id===id)).filte
 function drugTable(list,withAlts){if(!list.length)return'<p class="muted">—</p>';
   let h='<table><tr><th>'+t('drugs')+'</th><th>'+t('batch')+'</th><th>'+t('price')+'</th><th>'+t('cost')+'</th><th>'+t('qty')+'</th>'+(withAlts?'<th></th>':'')+'</tr>';
   for(const d of list){const b=(d.batches||[])[0]||{};h+='<tr><td><b>'+esc(d.n)+'</b><br><span class="muted">'+esc(d.ing)+' • '+esc(d.do)+(d.rx?' • <span class="rx">Rx</span>':'')+'</span></td><td>'+(b.bn||'-')+'<br><span class="muted">'+(b.ex||'')+'</span></td><td>'+fmt(d.p)+'</td><td>'+fmt(pCost(d))+'</td><td>'+stockBadge(d)+'</td>';
-    if(withAlts)h+='<td style="white-space:nowrap"><button class="btn small" onclick="showAlts('+d.id+')">⇄</button> <button class="btn small" onclick="editPrice('+d.id+')">'+t('price')+'</button> <button class="btn small" style="background:#7f1d1d" onclick="delDrug('+d.id+')">×</button></td>';h+='</tr>';}
+    if(withAlts)h+='<td style="white-space:nowrap"><button class="btn small" onclick="showAlts('+d.id+')">⇄</button> <button class="btn small" onclick="editPrice('+d.id+')">'+t('price')+'</button> <button class="btn small" style="background:#c05555" onclick="delDrug('+d.id+')">×</button></td>';h+='</tr>';}
   return h+'</table>';}
 function doSearch(){const q=document.getElementById('search-input').value;
   document.getElementById('search-results').innerHTML=drugTable(search(q),true);document.getElementById('alts-box').innerHTML='';}
@@ -531,7 +788,9 @@ function showOnboarding(){
     '<button class="country-btn" onclick="pickCountry(\''+k+'\')"><b>'+c.name_ar+'</b><br><span class="muted">'+c.currency+' / '+c.curr2+'</span></button>').join('');
 }
 function pickCountry(code){ST.country=code;applyCountry(code);save();
-  document.getElementById('onboard').style.display='none';showLogin();}
+  document.getElementById('onboard').style.display='none';
+  if(FRESH_RUN){showSetup();return;}
+  if(needActivation())return;showLogin();}
 function showLogin(){document.getElementById('login').style.display='flex';}
 function doLogin(){
   const u=document.getElementById('lg-user').value.trim(),p=document.getElementById('lg-pass').value;
@@ -555,10 +814,11 @@ function renderSettings(){
   el('set-invfooter').value=ST.invFooter||'';
   el('set-alert30').value=ST.alertDays[0];el('set-alert60').value=ST.alertDays[1];el('set-alert90').value=ST.alertDays[2];
   el('set-apikey').value=ST.apiKey||'';
-  renderPayMethods();renderUsers();applyLabels();
+  renderPayMethods();renderUsers();renderActStatus();applyLabels();
 }
 function applyLabels(){
   document.querySelectorAll('[data-t]').forEach(e=>e.textContent=t(e.dataset.t));
+  document.querySelectorAll('[data-t-ph]').forEach(e=>e.placeholder=t(e.dataset.tPh));
   const ltr=(ST.lang==='en');
   document.documentElement.dir=ltr?'ltr':'rtl';
   document.documentElement.lang=ST.lang;
@@ -566,13 +826,13 @@ function applyLabels(){
   if(ltr&&s)s.disabled=true; else if(!ltr&&s)s.disabled=false;
 }
 function renderPayMethods(){
-  document.getElementById('pay-list').innerHTML=(ST.payMethods||[]).map((p,i)=>'<div class="chk">'+esc(ST.lang==='ar'?p.ar:p.en)+' <button class="btn small" style="background:#7f1d1d" onclick="ST.payMethods.splice('+i+',1);save();renderPayMethods()">×</button></div>').join('')||'<p class="muted">—</p>';
+  document.getElementById('pay-list').innerHTML=(ST.payMethods||[]).map((p,i)=>'<div class="chk">'+esc(ST.lang==='ar'?p.ar:p.en)+' <button class="btn small" style="background:#c05555" onclick="ST.payMethods.splice('+i+',1);save();renderPayMethods()">×</button></div>').join('')||'<p class="muted">—</p>';
 }
 function addPay(){const v=document.getElementById('set-newpay').value.trim();if(!v)return;
   ST.payMethods.push({id:'p'+Date.now(),ar:v,en:v});ST.payMethods._custom=true;save();renderPayMethods();}
 function renderUsers(){
   document.getElementById('users-list').innerHTML=ST.users.map(u=>'<div class="chk"><b>'+esc(u.name)+'</b> ('+u.u+') — '+t(ROLES[u.role])+
-    (u.id!==ST.currentUser?' <button class="btn small" style="background:#7f1d1d" onclick="ST.users=ST.users.filter(x=>x.id!=='+u.id+');save();renderUsers()">×</button>':'')+'</div>').join('');
+    (u.id!==ST.currentUser?' <button class="btn small" style="background:#c05555" onclick="ST.users=ST.users.filter(x=>x.id!=='+u.id+');save();renderUsers()">×</button>':'')+'</div>').join('');
   document.getElementById('set-newrole').innerHTML=Object.entries(ROLES).map(([k,v])=>'<option value="'+k+'">'+t(v)+'</option>').join('');
 }
 function addUser(){const n=document.getElementById('set-newname').value.trim(),u=document.getElementById('set-newuser').value.trim(),
@@ -785,7 +1045,7 @@ function onBarcode(code){const d=PRODUCTS.find(x=>x.bc===code)||search(code)[0];
 // ====== تبويبات ======
 function switchTab(n){document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
   document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
-  document.getElementById('tab-'+n).classList.add('active');document.getElementById('page-'+n).classList.add('active');renderTab(n);}
+  document.getElementById('tab-'+n).classList.add('active');document.querySelectorAll('.mtab').forEach(x=>x.classList.toggle('active',x.dataset.tab===n));document.getElementById('page-'+n).classList.add('active');renderTab(n);}
 function renderTab(n){
   if(n==='home')renderHome();if(n==='sell')renderSell();if(n==='drugs')doSearch();
   if(n==='inv')renderInv();if(n==='sup')renderSuppliers();if(n==='cust')renderCustomers();
@@ -800,14 +1060,13 @@ function renderSell(){
 }
 function initApp(){applyLabels();renderIXPicker();renderAll();renderCart();
   document.getElementById('login-user-name').textContent=(curUser()||{}).name||'';
-  const lg=(curUser()||{}).role;if(lg==='cashier'){document.getElementById('tab-rep').style.display='none';document.getElementById('tab-set').style.display='none';}
+  var hu=document.getElementById('hero-user');if(hu)hu.textContent=(curUser()||{}).name||'';
+  var hp=document.getElementById('hero-ph');if(hp)hp.textContent=(ST.pharmacy||{}).name||'';
+  const lg=(curUser()||{}).role;if(lg==='cashier'){document.getElementById('tab-rep').style.display='none';document.getElementById('tab-set').style.display='none';document.querySelectorAll('.mtab[data-tab=rep],.mtab[data-tab=set]').forEach(x=>x.style.display='none');}
   if(lg==='inventory'){document.getElementById('tab-sell').style.display='none';}
 }
 // تشغيل
-load();
-if(ST.currentUser&&ST.users.find(u=>u.id===ST.currentUser)){document.getElementById('login').style.display='none';document.getElementById('app').style.display='block';initApp();}
-else if(localStorage.getItem(LS_KEY)){showLogin();}
-else{showOnboarding();}
+boot();
 
 </script>
 </body>
