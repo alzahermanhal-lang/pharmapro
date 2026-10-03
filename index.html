@@ -53,7 +53,8 @@ td{padding:8px 6px;border-top:1px solid #334155;vertical-align:top}
 .msg.user{background:#0e7490;margin-right:auto}.msg.bot{background:#334155}
 .chat-row{display:flex;gap:8px}.chat-row input{flex:1;margin-bottom:0}
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
-@media(max-width:600px){.form-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.form-grid{grid-template-columns:1fr}
+table{display:block;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch}}
 .sell-row{display:grid;grid-template-columns:2fr 1fr auto;gap:8px;margin-bottom:8px}
 .sum-row{display:flex;justify-content:space-between;padding:6px 12px;background:#1e293b;border-radius:8px;margin-bottom:5px;font-size:.9rem}
 .sum-row.total{background:#0f766e;font-size:1rem;font-weight:bold}
@@ -97,14 +98,14 @@ details ol, details ul{padding-right:20px;margin:6px 0}
 </head>
 <body>
 <div class="overlay" id="onboard"><div class="box"><h2>💊 PharmaPro</h2><p style="color:#94a3b8;margin-bottom:14px">اختر دولة الصيدلية / Choose your country</p><div id="ob-countries"></div></div></div>
-<div class="overlay" id="login"><div class="box"><h2>🔐 <span data-t="login">تسجيل الدخول</span></h2><input type="text" id="lg-user" class="login-input" placeholder="admin"><input type="password" id="lg-pass" class="login-input" placeholder="••••"><div id="lg-err" style="color:#f87171;min-height:20px"></div><button class="btn" style="width:100%" onclick="doLogin()" data-t="login">دخول</button><p class="hint" style="margin-top:10px">أدخل بريدك الإلكتروني وكلمة المرور الخاصة بك</p></div></div>
+<div class="overlay" id="login"><div class="box"><h2>🔐 <span data-t="login">تسجيل الدخول</span></h2><input type="text" id="lg-user" class="login-input" placeholder="البريد الإلكتروني" style="direction:ltr;text-align:center"><input type="password" id="lg-pass" class="login-input" placeholder="كلمة المرور" style="direction:ltr;text-align:center"><div id="lg-err" style="color:#f87171;min-height:20px"></div><button class="btn" style="width:100%" onclick="doLogin()" data-t="login">دخول</button><p class="hint" style="margin-top:10px">أدخل بريدك الإلكتروني وكلمة المرور الخاصة بك</p></div></div>
 
 <!-- شاشة التفعيل -->
 <div class="overlay" id="activate" style="display:none"><div class="box">
 <h2>🔐 تفعيل النظام</h2>
 <p style="color:#94a3b8;margin-bottom:16px;font-size:.9rem;line-height:1.8">هذا النظام يعمل بكود تفعيل خاص بكل صيدلية<br>للحصول على الكود تواصل مع المورّد عبر واتساب</p>
 <input type="text" id="act-name" class="login-input" placeholder="اسم الصيدلية">
-<input type="text" id="act-code" class="login-input" placeholder="PH-XXXXXX" style="direction:ltr;text-align:center;letter-spacing:2px">
+<input type="text" id="act-code" class="login-input" placeholder="PHARMA-XXXXXXX-XXXX" style="direction:ltr;text-align:center;letter-spacing:2px">
 <div id="act-err" style="color:#f87171;min-height:22px;font-size:.85rem"></div>
 <button class="btn" style="width:100%" onclick="doActivate()">تفعيل</button>
 </div></div>
@@ -195,6 +196,15 @@ details ol, details ul{padding-right:20px;margin:6px 0}
 </div>
 </div>
 <script>
+window.addEventListener('error',function(e){
+  try{
+    var d=document.getElementById('errbox');
+    if(!d){d=document.createElement('div');d.id='errbox';
+    d.style.cssText='position:fixed;bottom:0;left:0;right:0;background:#7f1d1d;color:#fff;padding:14px;font-size:14px;z-index:99999;font-family:Tahoma;direction:rtl;line-height:1.8';
+    document.body.appendChild(d);}
+    d.textContent='\u26A0\uFE0F '+e.message+' \u2014 \u0633\u0637\u0631 '+(e.lineno||'?');
+  }catch(x){}
+});
 
 // ============================================================
 // PharmaPro - دوا - نظام إدارة الصيدليات (Multi-Country)
@@ -352,7 +362,7 @@ function initProducts(){
   const s=JSON.parse(localStorage.getItem(LS_KEY)||'null');
   if(s){ (s.customDrugs||[]).forEach(cd=>{ if(!PRODUCTS.find(d=>d.id===cd.id)) PRODUCTS.push(cd); });
     if(s.stkOverride) PRODUCTS.forEach(d=>{ if(s.stkOverride[d.id]) d.batches=s.stkOverride[d.id]; });
-    if(s.prodEdits) Object.entries(s.prodEdits).forEach(([nm,e])=>{const dd=PRODUCTS.find(x=>x.n===nm); if(dd){if(e.p)dd.p=e.p; if(e.bc!==undefined)dd.bc=e.bc;}}); }
+    if(s.prodEdits&&s.prodEdits[ST.country]) Object.entries(s.prodEdits[ST.country]).forEach(([nm,e])=>{const dd=PRODUCTS.find(x=>x.n===nm); if(dd){if(e.p)dd.p=e.p; if(e.bc!==undefined)dd.bc=e.bc;}}); }
   save();
 }
 initProducts();
@@ -677,7 +687,8 @@ function showOnboarding(){
   document.getElementById('ob-countries').innerHTML=Object.entries(COUNTRIES).map(([k,c])=>
     '<button class="country-btn" onclick="pickCountry(\''+k+'\')"><b>'+c.name_ar+'</b><br><span class="muted">'+c.currency+' / '+c.curr2+'</span></button>').join('');
 }
-function pickCountry(code){ST.country=code;applyCountry(code);save();
+function pickCountry(code){ST.country=code;applyCountry(code);ST.welcomed=true;save();
+  initProducts();
   document.getElementById('onboard').style.display='none';bootApp();}
 function showLogin(){document.getElementById('login').style.display='flex';}
 function doLogin(){
@@ -708,7 +719,7 @@ function renderSettings(){
   renderPayMethods();renderUsers();applyLabels();
 }
 function applyLabels(){
-  document.querySelectorAll('[data-t]').forEach(e=>e.textContent=t(e.dataset.t));
+  document.querySelectorAll('[data-t]').forEach(e=>{if(e.tagName==='INPUT'||e.tagName==='TEXTAREA')e.placeholder=t(e.dataset.t);else e.textContent=t(e.dataset.t);});
   const ltr=(ST.lang==='en');
   document.documentElement.dir=ltr?'ltr':'rtl';
   document.documentElement.lang=ST.lang;
@@ -770,7 +781,7 @@ function checkStorageOnBoot(){
   }
 }
 function persistAll(){save();}
-function saveProdEdit(d){ST.prodEdits=ST.prodEdits||{};ST.prodEdits[d.n]={p:d.p,bc:d.bc||''};save();}
+function saveProdEdit(d){ST.prodEdits=ST.prodEdits||{};ST.prodEdits[ST.country]=ST.prodEdits[ST.country]||{};ST.prodEdits[ST.country][d.n]={p:d.p,bc:d.bc||''};save();}
 
 // ====== المساعد والباركود (موروث من v2) ======
 function bestMatch(q){let best=null,bs=0;for(const d of PRODUCTS){let s=0;
@@ -1078,12 +1089,14 @@ function doCreateAcct(){
   if(!em.includes('@')||em.length<5){err.textContent='أدخل بريداً إلكترونياً صحيحاً';return;}
   if(p1.length<4){err.textContent='كلمة المرور ٤ أحرف على الأقل';return;}
   if(p1!==p2){err.textContent='كلمتا المرور غير متطابقتين';return;}
-  ST.users=[{id:1,u:em,p:p1,name:ST.actName||'المدير',role:'admin'}];
+  ST.users=[{id:1,u:em,p:p1,name:(ST.act&&ST.act.name)||'المدير',role:'admin'}];
   ST.acctCreated=true;save();
   document.getElementById('createacct').style.display='none';
-  showLogin();
+  if(!ST.welcomed){showOnboarding();}
+  else{showLogin();}
 }
 function bootApp(){
+  if(!ST.welcomed){showOnboarding();return;}
   if(ST.currentUser&&ST.users.find(u=>u.id===ST.currentUser)){document.getElementById('login').style.display='none';document.getElementById('app').style.display='block';initApp();}
   else{showLogin();}
 }
